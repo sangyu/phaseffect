@@ -1,0 +1,170 @@
+{
+ "interval": 2022,
+ "held_out": "interval 2 (2024) rows dropped at load",
+ "reference": "Follicular",
+ "target": "Luteal",
+ "feature_set": "all",
+ "rules": {
+  "min_days_per_phase": 3,
+  "min_participants": 5,
+  "min_shared_features": 10,
+  "features_requested": 17,
+  "cycle_length_range": [
+   10,
+   60
+  ],
+  "cycles": "closed, from menstrual onsets in the phase labels",
+  "standardizer": "pooled between-person SD of participants' follicular and luteal means, per feature",
+  "distance": "Euclidean over shared features, scaled to the full dimension",
+  "bootstrap": 5000,
+  "seed": 20261016,
+  "interval_type": "BCa over participants"
+ },
+ "qc": {
+  "labeled_days": 3698,
+  "temperature_nights_raw": 3258,
+  "temperature_nights_kept": 3242,
+  "rhr_rows_raw": 3698,
+  "rhr_rows_zero_treated_missing": 782,
+  "resp_rows_zero_treated_missing": 53,
+  "glucose_participants_converted_from_mgdl": 2,
+  "participants_with_labels": 42
+ },
+ "cycle_counts": {
+  "onsets": 129,
+  "open": 42,
+  "closed": 87,
+  "closed_outside_length_range": 0
+ },
+ "eligible_cycles_per_feature": {
+  "appetite": 64,
+  "bloating": 64,
+  "cramps": 64,
+  "fatigue": 64,
+  "foodcravings": 64,
+  "glucose": 55,
+  "headaches": 64,
+  "indigestion": 64,
+  "moodswing": 64,
+  "resp": 51,
+  "rhr": 52,
+  "rmssd": 51,
+  "sleep_h": 63,
+  "sleepissue": 64,
+  "sorebreasts": 64,
+  "stress": 64,
+  "temp": 63
+ },
+ "standardizers": {
+  "appetite": {
+   "sd": 0.5667302454464486,
+   "n_participants": 38
+  },
+  "bloating": {
+   "sd": 1.1940748005919721,
+   "n_participants": 38
+  },
+  "cramps": {
+   "sd": 0.8716048480110088,
+   "n_participants": 38
+  },
+  "fatigue": {
+   "sd": 1.0511689503170731,
+   "n_participants": 38
+  },
+  "foodcravings": {
+   "sd": 1.1244181334744947,
+   "n_participants": 38
+  },
+  "glucose": {
+   "sd": 0.5242008456967285,
+   "n_participants": 33
+  },
+  "headaches": {
+   "sd": 1.0239166680257266,
+   "n_participants": 38
+  },
+  "indigestion": {
+   "sd": 1.0674620344865433,
+   "n_participants": 38
+  },
+  "moodswing": {
+   "sd": 1.0776494823672667,
+   "n_participants": 38
+  },
+  "resp": {
+   "sd": 1.4891386588635702,
+   "n_participants": 32
+  },
+  "rhr": {
+   "sd": 7.313780766936329,
+   "n_participants": 37
+  },
+  "rmssd": {
+   "sd": 23.530000207323273,
+   "n_participants": 32
+  },
+  "sleep_h": {
+   "sd": 0.9574635708442677,
+   "n_participants": 37
+  },
+  "sleepissue": {
+   "sd": 1.140646196705578,
+   "n_participants": 38
+  },
+  "sorebreasts": {
+   "sd": 0.8940860849540844,
+   "n_participants": 38
+  },
+  "stress": {
+   "sd": 0.9554645463203116,
+   "n_participants": 38
+  },
+  "temp": {
+   "sd": 0.6666550287266161,
+   "n_participants": 37
+  }
+ },
+ "within": {
+  "point": 4.199441721739835,
+  "lo": 3.727265688191294,
+  "hi": 4.787175779691062
+ },
+ "between": {
+  "point": 4.205488680034397,
+  "lo": 3.8811466772377052,
+  "hi": 4.552325532896994
+ },
+ "ratio": {
+  "point": 0.9985621270785321,
+  "lo": 0.9238912826817632,
+  "hi": 1.077767064493283
+ },
+ "S_w": {
+  "point": 9.775090201491034,
+  "lo": 7.686438207438433,
+  "hi": 12.568661087395757
+ },
+ "between_all_participants": {
+  "point": 4.093127806918322,
+  "lo": 3.744301711751936,
+  "hi": 4.511371826258126,
+  "n_participants": 39,
+  "ratio_point": 1.0259737589043323,
+  "ratio_lo": 0.9070371034788935,
+  "ratio_hi": 1.1387020527675706
+ },
+ "n_participants_between": 24,
+ "n_participants_within": 24,
+ "n_participants_any_cycle": 39,
+ "n_cycles": 66,
+ "n_cycles_in_within_set": 51,
+ "n_features": 17,
+ "cycles_per_participant_max": 3,
+ "pairs_dropped_for_shared_features": 129,
+ "density_curves_allowed": {
+  "within": false,
+  "between": false
+ },
+ "note": "S_b (between-person variance component) and m_star (crossing number of cycles) are not in this file: S_b was zero at the point estimate and a bootstrap interval is undefined at that boundary, so m_star is not estimable from these cycles."
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "Methods",
+    "section": "",
+    "text": "mcPHASES v1.0.0 on PhysioNet, restricted access under the PhysioNet Restricted Health Data License. Interval 2022: 42 participants in Toronto, about three months each, with a Fitbit Sense (nightly wrist temperature, resting heart rate, HRV, sleep breathing rate, sleep), a Dexcom G6 continuous glucose monitor, Mira urinary LH and E3G with a four-phase label per day, and a daily symptom diary on a 0–5 scale. The 2024 return interval is held out and has not been used.\nCitations, as PhysioNet asks: the dataset record, Lin, B., Li, J. Y., Kalani, K., Truong, K., & Mariakakis, A. (2025). mcPHASES: A Dataset of Physiological, Hormonal, and Self-reported Events and Symptoms for Menstrual Health Tracking with Wearables (version 1.0.0). PhysioNet. doi:10.13026/zx6a-2c81; the platform, Pollard, T., et al. (2026). PhysioNet as a global platform for biomedical research. Nature Health. doi:10.1038/s44360-026-00096-z; and the descriptor, Lin et al. 2026, Scientific Data."
+  },
+  {
+    "objectID": "methods.html#data",
+    "href": "methods.html#data",
+    "title": "Methods",
+    "section": "",
+    "text": "mcPHASES v1.0.0 on PhysioNet, restricted access under the PhysioNet Restricted Health Data License. Interval 2022: 42 participants in Toronto, about three months each, with a Fitbit Sense (nightly wrist temperature, resting heart rate, HRV, sleep breathing rate, sleep), a Dexcom G6 continuous glucose monitor, Mira urinary LH and E3G with a four-phase label per day, and a daily symptom diary on a 0–5 scale. The 2024 return interval is held out and has not been used.\nCitations, as PhysioNet asks: the dataset record, Lin, B., Li, J. Y., Kalani, K., Truong, K., & Mariakakis, A. (2025). mcPHASES: A Dataset of Physiological, Hormonal, and Self-reported Events and Symptoms for Menstrual Health Tracking with Wearables (version 1.0.0). PhysioNet. doi:10.13026/zx6a-2c81; the platform, Pollard, T., et al. (2026). PhysioNet as a global platform for biomedical research. Nature Health. doi:10.1038/s44360-026-00096-z; and the descriptor, Lin et al. 2026, Scientific Data."
+  },
+  {
+    "objectID": "methods.html#from-rows-to-contrasts",
+    "href": "methods.html#from-rows-to-contrasts",
+    "title": "Methods",
+    "section": "From rows to contrasts",
+    "text": "From rows to contrasts\n\n\n\n\n\nflowchart LR\n    R[Raw tables&lt;br/&gt;2022 rows only] --&gt; Q[QC&lt;br/&gt;one value per participant-day;&lt;br/&gt;resting heart rate and breathing rate 0 = missing;&lt;br/&gt;glucose units by participant median;&lt;br/&gt;temperature nights ≥ 30 °C and ≥ 120 samples]\n    Q --&gt; M[Per participant and phase&lt;br/&gt;mean over labelled days, ≥ 3 days]\n    M --&gt; P[Paired within participant&lt;br/&gt;Menstrual, Fertility, Luteal − Follicular]\n    P --&gt; E[Paired mean difference and Hedges' g&lt;br/&gt;95 % BCa, 5,000 participant resamples]\n    Q --&gt; C[Closed cycles from menstrual onsets&lt;br/&gt;in the phase labels, 10–60 days]\n    C --&gt; V[One luteal − follicular vector per cycle&lt;br/&gt;17 features in pooled-SD units]\n    V --&gt; D[Within- vs between-person distances&lt;br/&gt;ICC per feature, participant bootstrap]"
+  },
+  {
+    "objectID": "methods.html#statistics",
+    "href": "methods.html#statistics",
+    "title": "Methods",
+    "section": "Statistics",
+    "text": "Statistics\n\nCohort shifts. DABEST paired mean difference and Hedges’ g with 95 % bias-corrected and accelerated bootstrap intervals over participants (5,000 resamples). Native units are primary; g only to compare cells across signals.\nRepeatability. Each closed cycle’s luteal − follicular shift is standardized by the pooled between-person SD of phase means. Euclidean distance between cycle vectors over their shared features, rescaled to the full dimension. Mean distance between a person’s own cycles against the mean distance to other people’s cycles, in the same participants. ICC(1) per feature from one-way ANOVA with unequal group sizes. Intervals from 5,000 participant resamples, BCa.\nNo hypothesis tests and no multiplicity adjustment. Every number is an estimate with an interval; counts of participants in each cell are stated."
+  },
+  {
+    "objectID": "methods.html#disclosure",
+    "href": "methods.html#disclosure",
+    "title": "Methods",
+    "section": "Disclosure",
+    "text": "Disclosure\n\nEvery figure and table pools at least five participants; most pool 24 to 42.\nNo participant-level value, identifier, calendar date or free-text entry appears in this repository or on this site.\nFigures made for this site are drawn from the cohort-level tables in tables/ by scripts/make_figures.py. The code that reads the restricted dataset is released from a separate repository after review, as the data licence asks of code behind publications."
+  },
+  {
+    "objectID": "methods.html#software",
+    "href": "methods.html#software",
+    "title": "Methods",
+    "section": "Software",
+    "text": "Software\nPython 3.12, pandas 2.2, numpy 2.1, DABEST 2025.10.20, matplotlib 3.10; Quarto 1.8 for this site."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "phaseffect",
+    "section": "",
+    "text": "Interval 2022 of the mcPHASES dataset: 42 participants, Fitbit Sense, Dexcom CGM, Mira urine hormones and a daily diary over about three months. Phases come from the hormone-based labels. Every contrast is within the same participants, against their own follicular days, and is reported as an effect size with a 95 % interval. Nothing on this site is participant-level.\n\n\nCohort shifts by phase\nLuteal − follicular, same participants: resting heart rate +3.0 bpm [2.2, 3.8], wrist temperature +0.23 °C [0.12, 0.31], glucose +0.16 mmol/L [0.06, 0.27], breathing rate +0.48 /min, HRV −3.9 ms. Menses is the symptom phase: cramps +1.1 points, 41 of 42 participants higher.\n\n\n\nDoes a person’s shift repeat?\nNot detectably, with two or three closed cycles per person: the distance between one person’s own luteal − follicular vectors equals the distance to other people’s, ratio 1.00 [0.92, 1.08]. Resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]).\n\n\n\nMethods in one screen · Prior findings on this dataset · aggregate tables in tables/"
+  },
+  {
+    "objectID": "cohort-shifts.html",
+    "href": "cohort-shifts.html",
+    "title": "Cohort shifts by phase",
+    "section": "",
+    "text": "Positive means higher than on the participant’s own follicular days. Paired mean differences with 95 % bias-corrected bootstrap intervals over 5,000 participant resamples (methods). The luteal phase moves every device signal in the same participants; menses moves the symptoms."
+  },
+  {
+    "objectID": "cohort-shifts.html#device-signals",
+    "href": "cohort-shifts.html#device-signals",
+    "title": "Cohort shifts by phase",
+    "section": "Device signals",
+    "text": "Device signals\n\n\n\n\n\n\n\n\n\n\n\nSignal\nn\nMenstrual − Follicular\nFertility − Follicular\nLuteal − Follicular\nHigher in luteal\n\n\n\n\nResting heart rate (bpm)\n42\n+1.07 [0.57, 1.57]\n+1.24 [0.70, 1.91]\n+3.01 [2.22, 3.79]\n37 of 42\n\n\nNightly wrist temperature (°C)\n42\n+0.09 [0.00, 0.16]\n+0.00 [−0.08, 0.07]\n+0.23 [0.12, 0.31]\n35 of 42\n\n\nDaily mean glucose (mmol/L)\n40–41\n+0.13 [−0.02, 0.25]\n+0.08 [−0.02, 0.19]\n+0.16 [0.06, 0.27]\n28 of 40\n\n\nSleep breathing rate (/min)\n37–38\n+0.30 [0.18, 0.41]\n+0.13 [0.03, 0.31]\n+0.48 [0.35, 0.63]\n33 of 37\n\n\nHRV, RMSSD (ms)\n37–38\n+1.6 [−0.2, 4.6]\n−3.4 [−5.8, −1.7]\n−3.9 [−5.6, −1.9]\n7 of 37\n\n\nMain sleep duration (h)\n42\n−0.13 [−0.31, 0.05]\n−0.17 [−0.35, −0.01]\n−0.10 [−0.25, 0.07]\n15 of 42"
+  },
+  {
+    "objectID": "cohort-shifts.html#symptoms-points-on-the-05-scale",
+    "href": "cohort-shifts.html#symptoms-points-on-the-05-scale",
+    "title": "Cohort shifts by phase",
+    "section": "Symptoms, points on the 0–5 scale",
+    "text": "Symptoms, points on the 0–5 scale\n\n\n\n\n\n\n\n\n\nSymptom\nMenstrual − Follicular\nFertility − Follicular\nLuteal − Follicular\n\n\n\n\ncramps\n+1.14 [0.92, 1.40], 41 of 42 higher\n+0.02\n+0.23 [0.11, 0.35]\n\n\nsore breasts\n+0.59 [0.43, 0.81]\n+0.05\n+0.35 [0.20, 0.55]\n\n\nbloating\n+0.66 [0.44, 0.94]\n+0.06\n+0.24 [0.09, 0.42]\n\n\nindigestion\n+0.38 [0.22, 0.57]\n−0.02\n+0.08 [−0.06, 0.24]\n\n\nmood swings\n+0.36 [0.20, 0.52]\n+0.04\n+0.19 [0.04, 0.36]\n\n\nfood cravings\n+0.34 [0.15, 0.56]\n−0.05\n+0.21 [0.08, 0.37]\n\n\nfatigue\n+0.28 [0.12, 0.50]\n−0.02\n+0.07 [−0.07, 0.25]\n\n\nsleep issues\n+0.21 [0.02, 0.38]\n+0.15 [−0.01, 0.32]\n+0.16 [0.03, 0.32]\n\n\nstress\n+0.18 [0.00, 0.39]\n−0.00\n−0.01\n\n\nheadaches\n+0.10 [−0.05, 0.28]\n−0.28 [−0.45, −0.12]\n−0.19 [−0.35, −0.05]\n\n\nappetite\n+0.04\n+0.05\n+0.14 [0.05, 0.22]"
+  },
+  {
+    "objectID": "cohort-shifts.html#standardized-to-compare-across-signals",
+    "href": "cohort-shifts.html#standardized-to-compare-across-signals",
+    "title": "Cohort shifts by phase",
+    "section": "Standardized, to compare across signals",
+    "text": "Standardized, to compare across signals\nHedges’ g uses the spread of participants’ phase means as its unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people scores lower than a one-point symptom shift against baselines that differ by less than a point. Use it to compare cells, not to size an effect.\n\n\n\nPaired Hedges’ g by phase. Bold: 95 % interval excludes zero. Rows ordered within each family by its strongest contrast.\n\n\n\n\n\nDo two phase contrasts move the same features? One dot per feature. The fertile-window and luteal vectors point the same way; menses is its own direction. Descriptive: features are not independent."
+  },
+  {
+    "objectID": "cohort-shifts.html#read-with",
+    "href": "cohort-shifts.html#read-with",
+    "title": "Cohort shifts by phase",
+    "section": "Read with",
+    "text": "Read with\n\nReference phase. Mira’s “Follicular” label is short (median 6 days) and excludes menses and the fertile window. Published contrasts use a late-follicular reference, so agreement with them is same-direction, not replication.\nOpen cycles included. Days in cycles that never closed count towards their labelled phase; a closed-cycle sensitivity run is pending.\nMultiplicity. 51 cells, no adjustment. 36 exclude zero; two or three would by chance. Symptom cells are strongly correlated with each other.\nNot blind. Participants saw the app’s phase predictions while reporting symptoms.\nData handling. 782 of 3,698 resting-heart-rate days were coded 0 and treated as missing; two participants’ glucose was converted from mg/dL; 16 of 3,258 temperature nights were dropped as artefacts.\n\nTable: tables/cohort_phenovector.csv, 51 rows, no identifiers."
+  },
+  {
+    "objectID": "prior-findings.html",
+    "href": "prior-findings.html",
+    "title": "Prior findings on this dataset",
+    "section": "",
+    "text": "Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. No published work reports a within-person effect with its uncertainty, a cross-signal concordance, or anything anchored on the 2024 progesterone metabolite. This page is the context for the findings here; figures reproduced from other works carry their own licence, stated in the caption."
+  },
+  {
+    "objectID": "prior-findings.html#inventory",
+    "href": "prior-findings.html#inventory",
+    "title": "Prior findings on this dataset",
+    "section": "Inventory",
+    "text": "Inventory\n\n\n\n#\nWork\nVenue, date\nType\nn\nHeadline number\n\n\n\n\n1\nLin et al. 2023\nnpj Digit Med, 2023-08\neffect estimate\n49, 149 cycles\nGlucose luteal − late-follicular β = 0.15 [0.09, 0.20] mmol/L\n\n\n2\nLin et al. 2024\nnpj Women’s Health, 2024-10\neffect estimate\n45, 123 cycles\nWrist temperature 34.0 ± 1.0 luteal vs 33.7 ± 0.8 late-follicular; peak 7.6 ± 4.8 d after the LH peak\n\n\n3\nLin et al. 2024, CHI\nCHI, 2024-05\nqualitative\n30\nFive design requirements\n\n\n4\nLin et al. 2024, IMWUT\nIMWUT 8(3), 2024-09\nqualitative\n50\nHow participants made sense of multimodal tracking\n\n\n5\nLin et al. 2025, IMWUT\nIMWUT 9(3), 2025-09\nqualitative\n20\nThe 2024 return interval as an app study\n\n\n6\nLin et al. 2025, ACM HEALTH\nACM Trans Comput Healthc, 2025-12\nqualitative\n50\nBarriers to a holistic view\n\n\n7\nLin 2025, PhD thesis\nU Toronto, 2025-10\nqualitative\n—\nChapters 3–6 are works 4, 3, 5, 6\n\n\n8\nLin et al. 2026, descriptor · PhysioNet\nSci Data, 2026-02\ndescriptive\n42 (+20)\nRepeated-measures ANOVA across phases: temperature F(3, 123) = 11.63, RHR F(3, 123) = 10.26\n\n\n9\nSpecht et al. 2026\nmedRxiv, 2026-04\nclassifier\n41\nSymptoms only, four-phase leave-one-subject-out: 67.6 %, macro-F1 0.662; calendar-only 63.0 %\n\n\n10\nXu et al. 2026\nIEEE COMPSAC, 2026-07\npredictor\n—\nWearable model beats calendar baselines for next-menses timing; no numbers in the abstract\n\n\n11\nWang & Li 2026, FemWear\narXiv, 2026-08\nclassifier\n42\nNested leave-one-participant-out phase macro-F1 0.2955 vs 0.2988 baseline\n\n\n12\nWang 2026, Scale-to-Dialogue\narXiv, 2026-08\nclassifier\n42\nSix-item vs three-cluster symptom questioning: QWK 0.976 vs 0.913\n\n\n13\nKogelman et al. 2026\nbioRxiv, 2026-08\neffect estimate\n37, 96 cycles\nBetween-person ICC: cycle length 0.26, late-follicular 0.51, luteal 0.25, menstrual 0.31\n\n\n14\nRibeiro 2026\nBehav Res Methods, submitted 2026-09\nreanalysis audit\n41\nHeterogeneity of E3G coupling not above a phase-randomised null: RHR p = 0.156, temperature p = 0.874; an earlier p = 0.024 was a join artefact\n\n\n15\nGoyal 2026\nOxford J Student Scholarship, 2026-09\nclassifier\n30\nBleeding-day ROC-AUC from cycle history alone 0.822; symptoms and wearables did not add\n\n\n16\nNsugbe & Lin 2026\nJ Intell Med, 2026-09\nclassifier\n42, 126 cycles\nMultimodal − best unimodal: median +0.0156 macro-F1\n\n\n17\nDutta 2026, aadya-m1\nZenodo, 2026-10\nforecaster\n41\nAn optional LH-test input narrows the 80 % next-period window from ≈ 12 to ≈ 7 days\n\n\n\nGrey literature (repository READMEs, not reproduced): leave-one-subject-out four-phase classifiers in which cycle day carries most of the signal (macro-F1 0.643 from cycle day vs 0.363 from physiology); a 2022 → 2024 distribution shift (KS = 0.322); an LH-aligned clustering of physiology that found no consistent clusters."
+  },
+  {
+    "objectID": "prior-findings.html#what-is-established-signal-by-signal",
+    "href": "prior-findings.html#what-is-established-signal-by-signal",
+    "title": "Prior findings on this dataset",
+    "section": "What is established, signal by signal",
+    "text": "What is established, signal by signal\n\n\n\n\n\n\n\n\n\nSignal\nPublished finding\nSource\nNot published\n\n\n\n\nGlucose\nBiphasic over the cycle; luteal − late-follicular β = 0.15 [0.09, 0.20] mmol/L\n1\nPer-person size; repeatability\n\n\nWrist temperature\nGroup means by phase 33.9 / 33.7 / 33.8 / 34.0 °C; peak 7.6 ± 4.8 d after the LH peak\n2, 8\nEffect in °C with an interval; per-person shift\n\n\nResting heart rate\nANOVA across phases; lowest in follicular, highest in luteal (boxplots only)\n8\nAny size in bpm\n\n\nHRV, breathing rate, sleep\nClassifier features only\n11, 16\nAny phase estimate\n\n\nPhase lengths\nMedian cycle 31 d; menstrual 6, late-follicular 11, luteal 14; ICCs 0.26 / 0.31 / 0.51 / 0.25\n13\n—\n\n\nSymptoms\nLuteal vs late-follicular on a probit scale: cramps +0.94, sore breasts +0.97, bloating +0.38; symptom ICCs 0.21–0.66\n1, 13, 9\n—\n\n\nHeterogeneity\nBetween-person spread of E3G-coupling slopes not larger than a phase-randomised null\n14\n—\n\n\n2022 → 2024\nFeature distributions shift; physiology-only phase accuracy falls\ngrey\nAny confirmatory use of 2024"
+  },
+  {
+    "objectID": "prior-findings.html#published-figures-worth-knowing",
+    "href": "prior-findings.html#published-figures-worth-knowing",
+    "title": "Prior findings on this dataset",
+    "section": "Published figures worth knowing",
+    "text": "Published figures worth knowing\n\n\n\nLin et al. 2023, Fig. 2 (CC BY 4.0). LOESS curves of daily median glucose, LH and E3G over the normalised cycle with 95 % bands: glucose falls to about 5.8 mmol/L near 20 % of the cycle and rises after the LH peak.\n\n\n\n\n\nLin et al. 2024, Fig. 1 (CC BY-NC-ND 4.0, reproduced without change). Nightly wrist temperature, LH and E3G over the normalised cycle. The whole temperature excursion is about 0.3 °C.\n\n\n\n\n\nKogelman et al. 2026, Fig. 2 (CC BY). Mean symptom intensity by phase and symptom ICCs; conditioning on phase changes the ICCs by less than 4 % except for cramps."
+  },
+  {
+    "objectID": "prior-findings.html#published-results-beside-the-estimates-here",
+    "href": "prior-findings.html#published-results-beside-the-estimates-here",
+    "title": "Prior findings on this dataset",
+    "section": "Published results beside the estimates here",
+    "text": "Published results beside the estimates here\n\n\n\nReference phases differ (late-follicular in the papers, the hormone app’s shorter “Follicular” label here) and the cohorts differ (49 and 45 vs 42 participants), so this is a same-direction check, not a replication.\n\n\n\n\n\n\n\n\n\n\n\nSignal, luteal − follicular\nPublished\nThis site\nAgreement\n\n\n\n\nGlucose\nβ 0.15 [0.09, 0.20] mmol/L, 49 participants\n+0.16 [0.06, 0.27], 40\nSame direction and size\n\n\nWrist temperature\n34.0 vs 33.7 °C, no interval, 45\n+0.23 [0.12, 0.31] °C, 42\nSame direction and size\n\n\nResting heart rate\nF(3, 123) = 10.26, no bpm\n+3.0 [2.2, 3.8] bpm, 42\nDirection agrees; size unpublished\n\n\nBreathing rate, HRV\nclassifier features only\n+0.48 /min; −3.9 ms\nNo published estimate\n\n\nHeterogeneity\nE3G-coupling spread not above null\npersonal shift vector not detectable over 2–3 cycles\nBoth say person differences are hard to see with few cycles"
+  },
+  {
+    "objectID": "prior-findings.html#data-hazards-reported-by-prior-users",
+    "href": "prior-findings.html#data-hazards-reported-by-prior-users",
+    "title": "Prior findings on this dataset",
+    "section": "Data hazards reported by prior users",
+    "text": "Data hazards reported by prior users\n\n\n\n\n\n\n\n\nHazard\nWho reports it\nHandling here\n\n\n\n\nSeveral Fitbit rows per participant-day; a naive join multiplies observations\nRibeiro audit (p 0.024 → 0.874)\nOne value per participant-day before any join\n\n\nResting heart rate 0 means missing; undocumented\nRibeiro; this project\n0 treated as missing\n\n\nGlucose in mg/dL for two participants\nGitHub issue on the dataset repository; this project\nConverted on the participant’s median\n\n\n2022 and 2024 differ: no diary, PdG added, different RHR export, distribution shift\nDescriptor Fig. 2; repositories; Kogelman\n2024 held out\n\n\nPublished cohort results use 45–49 participants; 42 released\nDataset authors\nSame-direction checks only\n\n\nSymptom diary collected while participants saw their phase predictions\nLin 2024 IMWUT\nSymptom contrasts are not blind\n\n\nPhase lengths depend on the labeller\nWorks 1, 8, 13\nReference phase stated on every page"
+  },
+  {
+    "objectID": "prior-findings.html#licences-of-the-material-reproduced-here",
+    "href": "prior-findings.html#licences-of-the-material-reproduced-here",
+    "title": "Prior findings on this dataset",
+    "section": "Licences of the material reproduced here",
+    "text": "Licences of the material reproduced here\n\n\n\n\n\n\n\n\nSource\nLicence\nUse on this site\n\n\n\n\nLin 2023\nCC BY 4.0\nFigure reproduced with attribution\n\n\nLin 2024, Lin 2026 descriptor\nCC BY-NC-ND 4.0\nOne figure reproduced without change, non-commercial\n\n\nKogelman 2026, Specht 2026\nCC BY\nFigure reproduced with attribution\n\n\narXiv works\nCC BY 4.0\nNumbers only\n\n\nGoyal 2026, Nsugbe & Lin 2026, Xu 2026\nnot stated or inaccessible\nNumbers from the abstract only"
+  },
+  {
+    "objectID": "repeatability.html",
+    "href": "repeatability.html",
+    "title": "Does a person’s shift repeat?",
+    "section": "",
+    "text": "Not detectably. The mean distance between one person’s own cycle vectors equals the mean distance to other people’s: ratio 1.00 [0.92, 1.08] over 17 features, 0.97 [0.84, 1.10] over the six device signals. Per feature, resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]). The wrist-temperature rise, the cohort’s most reliable, does not repeat within a person at this sampling density (ICC −0.02 [−0.34, 0.31]).\nflowchart LR\n    A[42 participants&lt;br/&gt;3,698 labelled days] --&gt; B[87 closed cycles&lt;br/&gt;from menstrual onsets]\n    B --&gt; C[66 cycles with ≥ 3 days&lt;br/&gt;in both phases, 39 participants]\n    C --&gt; D[24 participants with ≥ 2 such cycles&lt;br/&gt;51 cycles, at most 3 each]\n    D --&gt; E[within 4.20 vs between 4.21&lt;br/&gt;ratio 1.00, 0.92 to 1.08]"
+  },
+  {
+    "objectID": "repeatability.html#the-numbers",
+    "href": "repeatability.html#the-numbers",
+    "title": "Does a person’s shift repeat?",
+    "section": "The numbers",
+    "text": "The numbers\n\n\n\n\n\n\n\n\nQuantity\n17 features\n6 device signals\n\n\n\n\nParticipants with ≥ 2 eligible closed cycles\n24 (51 cycles)\n22 (46 cycles)\n\n\nMean within-person distance\n4.20 [3.73, 4.79]\n2.03 [1.67, 2.61]\n\n\nMean between-person distance, same participants\n4.21 [3.88, 4.55]\n2.09 [1.82, 2.43]\n\n\nRatio within / between\n1.00 [0.92, 1.08]\n0.97 [0.84, 1.10]\n\n\nBetween-person variance component, summed over features\n0 at the point estimate\n0.03 [0, 0.64]\n\n\nCycles at which personal data would beat the cohort mean\nnot estimable\nnot estimable\n\n\n\nDistances are in pooled between-person SD units summed over the features, so the two columns are not comparable with each other."
+  },
+  {
+    "objectID": "repeatability.html#per-feature",
+    "href": "repeatability.html#per-feature",
+    "title": "Does a person’s shift repeat?",
+    "section": "Per feature",
+    "text": "Per feature\n\n\n\nFeature\nICC(1) [95 % BCa]\nParticipants / cycles\n\n\n\n\nResting heart rate\n0.61 [0.09, 0.86]\n14 / 29\n\n\nSore breasts\n0.53 [0.20, 0.81]\n24 / 50\n\n\nCramps\n0.32 [−0.17, 0.71]\n24 / 50\n\n\nBloating\n0.30 [−0.11, 0.67]\n24 / 50\n\n\nMain sleep duration\n0.25 [−0.07, 0.59]\n24 / 50\n\n\nHRV (RMSSD)\n0.23 [0.01, 0.61]\n19 / 38\n\n\nMood swings, food cravings\n0.05, 0.02\n24 / 50\n\n\nNightly wrist temperature\n−0.02 [−0.34, 0.31]\n24 / 50\n\n\nDaily mean glucose\n−0.05 [−0.44, 0.35]\n21 / 43\n\n\nHeadaches, appetite, indigestion\n−0.10, −0.11, −0.11\n24 / 50\n\n\nFatigue\n−0.27 [−0.57, 0.27]\n24 / 50\n\n\nSleep breathing rate\n−0.31 [−0.60, 0.09]\n19 / 38\n\n\nStress\n−0.43 [−0.63, −0.10]\n24 / 50\n\n\nSleep issues\n−0.45 [−0.78, −0.11]\n24 / 50"
+  },
+  {
+    "objectID": "repeatability.html#read-with",
+    "href": "repeatability.html#read-with",
+    "title": "Does a person’s shift repeat?",
+    "section": "Read with",
+    "text": "Read with\n\nTwo or three cycles per person, 24 people. An ICC from pairs has large sampling error; the ratio’s interval spans 0.92 to 1.08. This is what one three-month interval can show, not a statement about physiology.\nDay-to-day noise attenuates every ICC. On synthetic data with a planted repeatability of 0.8, this estimator returned 0.36 to 0.56.\nThe scale compresses the device signals. Distances use the between-person spread of phase means as their unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift. With 17 equal-weight features, symptom noise dominates the vector.\nResting heart rate reaches 14 participants because a cycle needs three valid days in each phase and 782 of 3,698 days were coded 0.\nA negative ICC means two cycles of the same person differ more than two cycles of different people. With these intervals, stress and sleep issues are observations to carry, not findings."
+  },
+  {
+    "objectID": "repeatability.html#next",
+    "href": "repeatability.html#next",
+    "title": "Does a person’s shift repeat?",
+    "section": "Next",
+    "text": "Next\nA variance-component analysis of the five device signals that separates day-to-day noise from cycle-to-cycle and person-to-person variation, on the spread of the shifts themselves, with the number of cycles a person needs before her own data outweigh the cohort shift. Built and tested on synthetic data; the real run is pending.\nTables: tables/feature_icc.csv, tables/repeatability_summary.json. The between-person variance component was zero at the point estimate, so the crossing number of cycles is not estimable and is not in the file."
+  }
+]

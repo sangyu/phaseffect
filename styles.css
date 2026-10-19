@@ -1,0 +1,21 @@
+/* paper-and-ink */
+:root {
+  --ink: #1a1a1a;
+  --ink2: #555;
+  --paper: #fcfcfa;
+  --rule: #ddd;
+}
+body { background: var(--paper); color: var(--ink); }
+.navbar { background: #fff !important; border-bottom: 1px solid var(--rule); }
+.navbar .navbar-brand, .navbar a { color: var(--ink) !important; }
+h1.title { font-weight: 600; letter-spacing: -0.01em; }
+.subtitle.lead { color: var(--ink2); font-size: 1.05rem; }
+h2 { font-size: 1.25rem; font-weight: 600; margin-top: 2rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.2rem; }
+figure img, .quarto-figure img, img { max-width: 100%; height: auto; }
+figcaption, .figure-caption { color: var(--ink2); font-size: 0.9rem; text-align: left; }
+table { font-size: 0.9rem; }
+table th { font-weight: 600; }
+.small { font-size: 0.85rem; color: var(--ink2); }
+.page-footer, .nav-footer { color: var(--ink2); font-size: 0.85rem; }
+.callout { border-left-color: var(--ink2); }
+a { color: #1f4e79; }

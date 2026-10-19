@@ -1,0 +1,39 @@
+---
+title: "Methods"
+subtitle: "One screen. The analysis code that reads the restricted dataset is released separately."
+---
+
+## Data
+
+[mcPHASES v1.0.0](https://physionet.org/content/mcphases/1.0.0/) on PhysioNet, restricted access under the PhysioNet Restricted Health Data License. Interval 2022: 42 participants in Toronto, about three months each, with a Fitbit Sense (nightly wrist temperature, resting heart rate, HRV, sleep breathing rate, sleep), a Dexcom G6 continuous glucose monitor, Mira urinary LH and E3G with a four-phase label per day, and a daily symptom diary on a 0–5 scale. The 2024 return interval is held out and has not been used.
+
+Citations, as PhysioNet asks: the dataset record, Lin, B., Li, J. Y., Kalani, K., Truong, K., & Mariakakis, A. (2025). *mcPHASES: A Dataset of Physiological, Hormonal, and Self-reported Events and Symptoms for Menstrual Health Tracking with Wearables* (version 1.0.0). PhysioNet. [doi:10.13026/zx6a-2c81](https://doi.org/10.13026/zx6a-2c81); the platform, Pollard, T., et al. (2026). PhysioNet as a global platform for biomedical research. *Nature Health*. [doi:10.1038/s44360-026-00096-z](https://doi.org/10.1038/s44360-026-00096-z); and the descriptor, [Lin et al. 2026, *Scientific Data*](https://doi.org/10.1038/s41597-026-06805-3).
+
+## From rows to contrasts
+
+```{mermaid}
+flowchart LR
+    R[Raw tables<br/>2022 rows only] --> Q[QC<br/>one value per participant-day;<br/>resting heart rate and breathing rate 0 = missing;<br/>glucose units by participant median;<br/>temperature nights ≥ 30 °C and ≥ 120 samples]
+    Q --> M[Per participant and phase<br/>mean over labelled days, ≥ 3 days]
+    M --> P[Paired within participant<br/>Menstrual, Fertility, Luteal − Follicular]
+    P --> E[Paired mean difference and Hedges' g<br/>95 % BCa, 5,000 participant resamples]
+    Q --> C[Closed cycles from menstrual onsets<br/>in the phase labels, 10–60 days]
+    C --> V[One luteal − follicular vector per cycle<br/>17 features in pooled-SD units]
+    V --> D[Within- vs between-person distances<br/>ICC per feature, participant bootstrap]
+```
+
+## Statistics
+
+- **Cohort shifts.** DABEST paired mean difference and Hedges' g with 95 % bias-corrected and accelerated bootstrap intervals over participants (5,000 resamples). Native units are primary; g only to compare cells across signals.
+- **Repeatability.** Each closed cycle's luteal − follicular shift is standardized by the pooled between-person SD of phase means. Euclidean distance between cycle vectors over their shared features, rescaled to the full dimension. Mean distance between a person's own cycles against the mean distance to other people's cycles, in the same participants. ICC(1) per feature from one-way ANOVA with unequal group sizes. Intervals from 5,000 participant resamples, BCa.
+- No hypothesis tests and no multiplicity adjustment. Every number is an estimate with an interval; counts of participants in each cell are stated.
+
+## Disclosure
+
+- Every figure and table pools at least five participants; most pool 24 to 42.
+- No participant-level value, identifier, calendar date or free-text entry appears in this repository or on this site.
+- Figures made for this site are drawn from the cohort-level tables in `tables/` by `scripts/make_figures.py`. The code that reads the restricted dataset is released from a separate repository after review, as the data licence asks of code behind publications.
+
+## Software
+
+Python 3.12, pandas 2.2, numpy 2.1, DABEST 2025.10.20, matplotlib 3.10; Quarto 1.8 for this site.

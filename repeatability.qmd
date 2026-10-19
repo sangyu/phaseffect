@@ -1,0 +1,62 @@
+---
+title: "Does a person's shift repeat?"
+subtitle: "One luteal − follicular vector per closed cycle, 17 features. Interval 2022, 24 participants with two or three cycles."
+---
+
+Not detectably. The mean distance between one person's own cycle vectors equals the mean distance to other people's: ratio **1.00 [0.92, 1.08]** over 17 features, 0.97 [0.84, 1.10] over the six device signals. Per feature, resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]). The wrist-temperature rise, the cohort's most reliable, does not repeat within a person at this sampling density (ICC −0.02 [−0.34, 0.31]).
+
+```{mermaid}
+flowchart LR
+    A[42 participants<br/>3,698 labelled days] --> B[87 closed cycles<br/>from menstrual onsets]
+    B --> C[66 cycles with ≥ 3 days<br/>in both phases, 39 participants]
+    C --> D[24 participants with ≥ 2 such cycles<br/>51 cycles, at most 3 each]
+    D --> E[within 4.20 vs between 4.21<br/>ratio 1.00, 0.92 to 1.08]
+```
+
+![A: mean Euclidean distance between a person's own cycle vectors and between her cycles and other people's, 95 % BCa over 5,000 participant resamples. B: ICC(1) of each feature's shift across a person's cycles. Filled: device signals.](figures/F2_repeatability.png)
+
+## The numbers
+
+| Quantity | 17 features | 6 device signals |
+|---|---|---|
+| Participants with ≥ 2 eligible closed cycles | 24 (51 cycles) | 22 (46 cycles) |
+| Mean within-person distance | 4.20 [3.73, 4.79] | 2.03 [1.67, 2.61] |
+| Mean between-person distance, same participants | 4.21 [3.88, 4.55] | 2.09 [1.82, 2.43] |
+| **Ratio within / between** | **1.00 [0.92, 1.08]** | **0.97 [0.84, 1.10]** |
+| Between-person variance component, summed over features | 0 at the point estimate | 0.03 [0, 0.64] |
+| Cycles at which personal data would beat the cohort mean | not estimable | not estimable |
+
+Distances are in pooled between-person SD units summed over the features, so the two columns are not comparable with each other.
+
+## Per feature
+
+| Feature | ICC(1) [95 % BCa] | Participants / cycles |
+|---|---|---|
+| Resting heart rate | **0.61 [0.09, 0.86]** | 14 / 29 |
+| Sore breasts | **0.53 [0.20, 0.81]** | 24 / 50 |
+| Cramps | 0.32 [−0.17, 0.71] | 24 / 50 |
+| Bloating | 0.30 [−0.11, 0.67] | 24 / 50 |
+| Main sleep duration | 0.25 [−0.07, 0.59] | 24 / 50 |
+| HRV (RMSSD) | 0.23 [0.01, 0.61] | 19 / 38 |
+| Mood swings, food cravings | 0.05, 0.02 | 24 / 50 |
+| Nightly wrist temperature | **−0.02 [−0.34, 0.31]** | 24 / 50 |
+| Daily mean glucose | −0.05 [−0.44, 0.35] | 21 / 43 |
+| Headaches, appetite, indigestion | −0.10, −0.11, −0.11 | 24 / 50 |
+| Fatigue | −0.27 [−0.57, 0.27] | 24 / 50 |
+| Sleep breathing rate | −0.31 [−0.60, 0.09] | 19 / 38 |
+| Stress | −0.43 [−0.63, −0.10] | 24 / 50 |
+| Sleep issues | −0.45 [−0.78, −0.11] | 24 / 50 |
+
+## Read with
+
+- **Two or three cycles per person, 24 people.** An ICC from pairs has large sampling error; the ratio's interval spans 0.92 to 1.08. This is what one three-month interval can show, not a statement about physiology.
+- **Day-to-day noise attenuates every ICC.** On synthetic data with a planted repeatability of 0.8, this estimator returned 0.36 to 0.56.
+- **The scale compresses the device signals.** Distances use the between-person spread of phase means as their unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift. With 17 equal-weight features, symptom noise dominates the vector.
+- **Resting heart rate reaches 14 participants** because a cycle needs three valid days in each phase and 782 of 3,698 days were coded 0.
+- A negative ICC means two cycles of the same person differ more than two cycles of different people. With these intervals, stress and sleep issues are observations to carry, not findings.
+
+## Next
+
+A variance-component analysis of the five device signals that separates day-to-day noise from cycle-to-cycle and person-to-person variation, on the spread of the shifts themselves, with the number of cycles a person needs before her own data outweigh the cohort shift. Built and tested on synthetic data; the real run is pending.
+
+Tables: [`tables/feature_icc.csv`](tables/feature_icc.csv), [`tables/repeatability_summary.json`](tables/repeatability_summary.json). The between-person variance component was zero at the point estimate, so the crossing number of cycles is not estimable and is not in the file.

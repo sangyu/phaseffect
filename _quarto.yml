@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - tables/
+
+website:
+  title: "phaseffect"
+  site-url: https://sangyu.github.io/phaseffect
+  repo-url: https://github.com/sangyu/phaseffect
+  description: "Menstrual-phase effects in wearable signals and symptoms: effect sizes with uncertainty from the mcPHASES dataset"
+  navbar:
+    left:
+      - text: Findings
+        menu:
+          - href: cohort-shifts.qmd
+            text: "Cohort shifts by phase"
+          - href: repeatability.qmd
+            text: "Does a person's shift repeat?"
+      - href: methods.qmd
+        text: Methods
+      - href: prior-findings.qmd
+        text: "Prior findings"
+    right:
+      - icon: github
+        href: https://github.com/sangyu/phaseffect
+        aria-label: GitHub
+  page-footer:
+    left: "Cohort aggregates over at least five participants. No participant-level value, identifier or date appears on this site."
+    right: "Data: mcPHASES v1.0.0 (PhysioNet, restricted access), interval 2022"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 2
+    fig-align: left
+    link-external-newwindow: true
+    mermaid:
+      theme: neutral
