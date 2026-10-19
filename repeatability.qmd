@@ -1,62 +1,54 @@
 ---
 title: "Does a person's shift repeat?"
-subtitle: "One luteal − follicular vector per closed cycle, 17 features. Interval 2022, 24 participants with two or three cycles."
+subtitle: "The luteal − follicular shift of five device signals, closed cycles, interval 2022. Day noise separated from cycle-to-cycle and person-to-person variation."
 ---
 
-Not detectably. The mean distance between one person's own cycle vectors equals the mean distance to other people's: ratio **1.00 [0.92, 1.08]** over 17 features, 0.97 [0.84, 1.10] over the six device signals. Per feature, resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]). The wrist-temperature rise, the cohort's most reliable, does not repeat within a person at this sampling density (ICC −0.02 [−0.34, 0.31]).
+Yes for resting heart rate, barely for wrist temperature. A three-level model of the daily values (person, cycle, day) splits each signal's luteal shift into its parts. **Resting heart rate**: between-person SD **1.9 bpm** [0.7, 2.7] on a 3.0 bpm cohort shift, repeatability 0.49 [0.09, 0.83]; two of a person's own cycles already outweigh the cohort mean. **Wrist temperature**: SD **0.11 °C** [0.04, 0.27] on a 0.28 °C shift, single-cycle repeatability 0.08, eleven cycles to break even. Over the five signals the personal part of the shift vector is small: R_vec **0.07** [−0.11, 0.27], 75 % of resamples positive.
 
 ```{mermaid}
 flowchart LR
-    A[42 participants<br/>3,698 labelled days] --> B[87 closed cycles<br/>from menstrual onsets]
-    B --> C[66 cycles with ≥ 3 days<br/>in both phases, 39 participants]
-    C --> D[24 participants with ≥ 2 such cycles<br/>51 cycles, at most 3 each]
-    D --> E[within 4.20 vs between 4.21<br/>ratio 1.00, 0.92 to 1.08]
+    A[42 participants<br/>3,698 labelled days] --> M[Daily values, every closed cycle<br/>37–42 participants per signal]
+    M --> V[person · cycle · day<br/>variance components]
+    A --> S[One shift per closed cycle<br/>22 participants with ≥ 2 cycles]
+    S --> D[Vector distances → R_vec<br/>responsiveness score → ICC]
 ```
 
-![A: mean Euclidean distance between a person's own cycle vectors and between her cycles and other people's, 95 % BCa over 5,000 participant resamples. B: ICC(1) of each feature's shift across a person's cycles. Filled: device signals.](figures/F2_repeatability.png)
+![A: repeatability of each signal's shift, with day noise removed (R_true) and for a single cycle (R_cycle). B: the share of a single cycle's shift that comes from the person, the cycle and the day noise in a phase mean. C: the weight a person's own m cycles deserve against the cohort shift; 0.5 is the break-even line.](figures/F4_rep03.png)
 
-## The numbers
+## Per signal
 
-| Quantity | 17 features | 6 device signals |
+| Signal | Cohort shift | Between-person SD [95 %] | Cycle SD | Day SD | Repeatability, day noise removed | Single cycle | Weight at 2, 3 cycles |
+|---|---|---|---|---|---|---|---|
+| Resting heart rate (bpm) | +3.0 | **1.9 [0.7, 2.7]** | 2.0 | 1.7 | **0.49 [0.09, 0.83]** | 0.45 | 0.62, 0.71 |
+| Nightly wrist temperature (°C) | +0.28 | **0.11 [0.04, 0.27]** | 0.17 | 0.58 | 0.28 [0.03, 1.00] | 0.08 | 0.15, 0.21 |
+| Sleep breathing rate (/min) | +0.53 | 0.18 [0.04, 0.57] | 0.19 | 0.93 | 0.46 [0.03, 1.00] | 0.11 | 0.19, 0.26 |
+| HRV, RMSSD (ms) | −2.5 | 3.1 [0.1, 8.0] | 2.8 | 12.0 | 0.55 [0.02, 1.00] | 0.18 | 0.31, 0.40 |
+| Daily mean glucose (mmol/L) | +0.21 | 0.10 [0.01, 0.31] | 0.45 | 0.51 | 0.05 [0.00, 0.59] | 0.04 | 0.07, 0.10 |
+
+Intervals from 500 participant refits each, percentile. The upper limits of three repeatabilities reach 1.00 because a ratio's interval is uninformative above when the cycle component can vanish in a resample; the lower limits carry the message.
+
+## Vector and score
+
+| Quantity | Five device signals | With sore breasts added |
 |---|---|---|
-| Participants with ≥ 2 eligible closed cycles | 24 (51 cycles) | 22 (46 cycles) |
-| Mean within-person distance | 4.20 [3.73, 4.79] | 2.03 [1.67, 2.61] |
-| Mean between-person distance, same participants | 4.21 [3.88, 4.55] | 2.09 [1.82, 2.43] |
-| **Ratio within / between** | **1.00 [0.92, 1.08]** | **0.97 [0.84, 1.10]** |
-| Between-person variance component, summed over features | 0 at the point estimate | 0.03 [0, 0.64] |
-| Cycles at which personal data would beat the cohort mean | not estimable | not estimable |
+| Participants with ≥ 2 closed cycles | 22 of 39 | 21 of 39 |
+| Within / between distance ratio | 0.95 [0.81, 1.05] | 0.90 [0.76, 1.01] |
+| **R_vec**, the personal share of the vector | **0.07 [−0.11, 0.27]** | 0.16 [−0.06, 0.37] |
+| Responsiveness score ICC | 0.42 [0.03, 0.68] | 0.45 [0.08, 0.69] |
 
-Distances are in pooled between-person SD units summed over the features, so the two columns are not comparable with each other.
-
-## Per feature
-
-| Feature | ICC(1) [95 % BCa] | Participants / cycles |
-|---|---|---|
-| Resting heart rate | **0.61 [0.09, 0.86]** | 14 / 29 |
-| Sore breasts | **0.53 [0.20, 0.81]** | 24 / 50 |
-| Cramps | 0.32 [−0.17, 0.71] | 24 / 50 |
-| Bloating | 0.30 [−0.11, 0.67] | 24 / 50 |
-| Main sleep duration | 0.25 [−0.07, 0.59] | 24 / 50 |
-| HRV (RMSSD) | 0.23 [0.01, 0.61] | 19 / 38 |
-| Mood swings, food cravings | 0.05, 0.02 | 24 / 50 |
-| Nightly wrist temperature | **−0.02 [−0.34, 0.31]** | 24 / 50 |
-| Daily mean glucose | −0.05 [−0.44, 0.35] | 21 / 43 |
-| Headaches, appetite, indigestion | −0.10, −0.11, −0.11 | 24 / 50 |
-| Fatigue | −0.27 [−0.57, 0.27] | 24 / 50 |
-| Sleep breathing rate | −0.31 [−0.60, 0.09] | 19 / 38 |
-| Stress | −0.43 [−0.63, −0.10] | 24 / 50 |
-| Sleep issues | −0.45 [−0.78, −0.11] | 24 / 50 |
+The score asks a narrower question than the vector: not whether a person's whole shift pattern is her own, but whether the size of her shift along the shared direction is. It has the clearer answer.
 
 ## Read with
 
-- **Two or three cycles per person, 24 people.** An ICC from pairs has large sampling error; the ratio's interval spans 0.92 to 1.08. This is what one three-month interval can show, not a statement about physiology.
-- **Day-to-day noise attenuates every ICC.** On synthetic data with a planted repeatability of 0.8, this estimator returned 0.36 to 0.56.
-- **The scale compresses the device signals.** Distances use the between-person spread of phase means as their unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift. With 17 equal-weight features, symptom noise dominates the vector.
-- **Resting heart rate reaches 14 participants** because a cycle needs three valid days in each phase and 782 of 3,698 days were coded 0.
-- A negative ICC means two cycles of the same person differ more than two cycles of different people. With these intervals, stress and sleep issues are observations to carry, not findings.
+- **Two or three cycles per person**, 22 people for the vector; 21 to 34 with two or more cycles per signal for the model. Nothing here is a precise personal repeatability, only its presence for resting heart rate and its smallness for temperature.
+- **Day noise dominates temperature**: 71 % of a single cycle's temperature shift is night-to-night noise in the phase means, 21 % cycle-to-cycle, 8 % the person. Glucose's shift varies from cycle to cycle more than between people.
+- **Sore breasts**, the one symptom checked, is itself repeatable (SD 0.44 points [0.11, 0.62]); symptoms were reported while participants saw the app's phase predictions.
+- Closed cycles from menstrual onsets in the labels, 10–60 days; the short "Follicular" label is the reference; nothing uses the 2024 interval.
 
-## Next
+## The earlier check: 17 features on the between-person scale
 
-A variance-component analysis of the five device signals that separates day-to-day noise from cycle-to-cycle and person-to-person variation, on the spread of the shifts themselves, with the number of cycles a person needs before her own data outweigh the cohort shift. Built and tested on synthetic data; the real run is pending.
+Before the model above, a cruder check put all 17 features (six device signals and eleven symptoms) on a common scale, the between-person spread of phase means, and asked whether a person's cycle vectors lie closer to each other than to other people's. They did not: ratio 1.00 [0.92, 1.08] over 24 participants. On that scale a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift, and the symptom noise swamps the device signals. Per feature, resting heart rate was already the one repeatable signal (ICC 0.61 [0.09, 0.86], 14 participants) and temperature already was not (−0.02 [−0.34, 0.31]).
 
-Tables: [`tables/feature_icc.csv`](tables/feature_icc.csv), [`tables/repeatability_summary.json`](tables/repeatability_summary.json). The between-person variance component was zero at the point estimate, so the crossing number of cycles is not estimable and is not in the file.
+![Left: mean distance between a person's own cycle vectors and to other people's, 17 features. Right: per-feature ICC of the shift across a person's cycles.](figures/F2_repeatability.png)
+
+Tables: [`tables/rep03_components.csv`](tables/rep03_components.csv), [`tables/rep03_design_curve.csv`](tables/rep03_design_curve.csv), [`tables/rep03_summary.json`](tables/rep03_summary.json); the earlier check's [`tables/feature_icc.csv`](tables/feature_icc.csv) and [`tables/repeatability_summary.json`](tables/repeatability_summary.json).

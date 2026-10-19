@@ -8,15 +8,17 @@ How much does the menstrual phase move wearable signals and symptoms, and does a
 
 Luteal − follicular, same participants: resting heart rate **+3.0 bpm** [2.2, 3.8], wrist temperature **+0.23 °C** [0.12, 0.31], glucose **+0.16 mmol/L** [0.06, 0.27], breathing rate +0.48 /min, HRV −3.9 ms. Menses is the symptom phase: cramps +1.1 points, 41 of 42 participants higher. [Page →](https://sangyu.github.io/phaseffect/cohort-shifts.html)
 
-![Phase shifts in native units: six device signals and eleven diary symptoms, three contrasts each, 95 % BCa intervals](figures/F1_cohort_shifts.png)
+![Phase shifts in native units with their bootstraps: six device signals and eleven diary symptoms, half-violin per contrast, 95 % BCa intervals](figures/P1_phenovector_forest.png)
 
-<img src="figures/P2_phenovector_heatmap.png" alt="Hedges' g by phase, for comparison across signals" width="55%">
+<img src="figures/P2_phenovector_whorlmap.png" alt="Whorlmap of Hedges' g: each cell spirals the bootstrap from the tail nearest zero to the far tail" width="48%">
+
+Whorlmap of Hedges' g for comparison across signals: each cell spirals its bootstrap from the tail nearest zero (outer ring) to the far tail (centre); a coloured outer ring means the 95 % interval excludes zero.
 
 ## Does a person's shift repeat?
 
-Not detectably with two or three closed cycles per person: the distance between one person's own luteal − follicular vectors equals the distance to other people's, ratio **1.00** [0.92, 1.08]. Resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]); the wrist-temperature rise does not repeat (ICC −0.02 [−0.34, 0.31]). [Page →](https://sangyu.github.io/phaseffect/repeatability.html)
+Yes for resting heart rate, barely for wrist temperature. A three-level model (person, cycle, day) gives resting heart rate a between-person SD of **1.9 bpm** [0.7, 2.7] on a 3.0 bpm cohort shift, so two of a person's own cycles already outweigh the cohort mean; wrist temperature gets **0.11 °C** [0.04, 0.27] on a 0.28 °C shift and needs eleven cycles to break even. Over five signals the personal part of the shift vector is small, R_vec 0.07 [−0.11, 0.27]. [Page →](https://sangyu.github.io/phaseffect/repeatability.html)
 
-![Within- vs between-person distances and per-feature ICC](figures/F2_repeatability.png)
+![Repeatability per signal, variance shares, and the weight a person's own cycles deserve](figures/F4_rep03.png)
 
 ## Context
 
@@ -29,7 +31,7 @@ Not detectably with two or three closed cycles per person: the distance between 
 | `*.qmd`, `_quarto.yml`, `styles.css` | The site. Render with `quarto render` (Quarto ≥ 1.4) |
 | `docs/` | Rendered site, served by GitHub Pages |
 | `tables/` | Cohort-level tables: effect sizes for 51 cells, per-feature ICCs, the repeatability summary |
-| `figures/` | Figures. `F1` and `F2` are redrawn from `tables/` by `scripts/make_figures.py` (pandas, matplotlib) |
+| `figures/` | Figures. `P*` come from the analysis runs (DABEST half-violins and whorlmap cells are cohort bootstraps); `F2` and `F3` are redrawn from `tables/` by `scripts/make_figures.py` (pandas, matplotlib) |
 
 ## Data and licences
 

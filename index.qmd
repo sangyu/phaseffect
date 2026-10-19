@@ -13,15 +13,15 @@ Interval 2022 of the [mcPHASES](https://physionet.org/content/mcphases/1.0.0/) d
 
 Luteal − follicular, same participants: resting heart rate **+3.0 bpm** [2.2, 3.8], wrist temperature **+0.23 °C** [0.12, 0.31], glucose **+0.16 mmol/L** [0.06, 0.27], breathing rate +0.48 /min, HRV −3.9 ms. Menses is the symptom phase: cramps +1.1 points, 41 of 42 participants higher.
 
-[![](figures/P2_phenovector_heatmap.png)](cohort-shifts.qmd)
+[![](figures/P1_phenovector_forest.png)](cohort-shifts.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6}
 ### [Does a person's shift repeat?](repeatability.qmd)
 
-Not detectably, with two or three closed cycles per person: the distance between one person's own luteal − follicular vectors equals the distance to other people's, ratio **1.00** [0.92, 1.08]. Resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]).
+Yes for resting heart rate: between-person SD **1.9 bpm** [0.7, 2.7] on a 3.0 bpm cohort shift; two of a person's own cycles already outweigh the cohort mean. Barely for wrist temperature: **0.11 °C** [0.04, 0.27] on a 0.28 °C shift, eleven cycles to break even. Over five signals the personal part of the shift vector is small, R_vec 0.07 [−0.11, 0.27].
 
-[![](figures/F2_repeatability.png)](repeatability.qmd)
+[![](figures/F4_rep03.png)](repeatability.qmd)
 :::
 
 :::

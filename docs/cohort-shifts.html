@@ -169,8 +169,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Positive means higher than on the participant’s own follicular days. Paired mean differences with 95 % bias-corrected bootstrap intervals over 5,000 participant resamples (<a href="./methods.html">methods</a>). The luteal phase moves every device signal in the same participants; menses moves the symptoms.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="figures/F1_cohort_shifts.png" class="img-fluid figure-img"></p>
-<figcaption>Shifts in native units. Top: six device signals, each on its own scale, three contrasts per signal. Bottom: eleven diary symptoms in points on their 0–5 scale. Filled markers: the 95 % interval excludes zero.</figcaption>
+<p><img src="figures/P1_phenovector_forest.png" class="img-fluid figure-img"></p>
+<figcaption>Shifts in native units with their bootstraps. Top: six device signals, each on its own scale, three contrasts per signal. Bottom: eleven diary symptoms in points on their 0–5 scale, one panel per contrast. Half-violin: the bootstrap distribution of the paired mean difference over 5,000 participant resamples; dot and bar: the estimate with its 95 % BCa interval; the number is the estimate.</figcaption>
 </figure>
 </div>
 <section id="device-signals" class="level2">
@@ -338,8 +338,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Hedges’ g uses the spread of participants’ phase means as its unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people scores lower than a one-point symptom shift against baselines that differ by less than a point. Use it to compare cells, not to size an effect.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="figures/P2_phenovector_heatmap.png" class="img-fluid figure-img"></p>
-<figcaption>Paired Hedges’ g by phase. Bold: 95 % interval excludes zero. Rows ordered within each family by its strongest contrast.</figcaption>
+<p><img src="figures/P2_phenovector_whorlmap.png" class="img-fluid figure-img"></p>
+<figcaption>Whorlmap of Hedges’ g. Each cell spirals its 5,000 bootstrap values from the tail nearest zero (outer ring) to the far tail (centre), 2.5 % trimmed at each end, so a coloured outer ring means the 95 % interval excludes zero. Colour range ±2, set by the widest cell. Rows ordered within each family by its strongest contrast.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figures/P4_phenovector_forest_g.png" class="img-fluid figure-img"></p>
+<figcaption>The same g with its bootstrap as half-violins, families by contrasts. Each family row has its own scale.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-left">

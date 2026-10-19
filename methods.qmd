@@ -27,12 +27,13 @@ flowchart LR
 - **Cohort shifts.** DABEST paired mean difference and Hedges' g with 95 % bias-corrected and accelerated bootstrap intervals over participants (5,000 resamples). Native units are primary; g only to compare cells across signals.
 - **Repeatability.** Each closed cycle's luteal − follicular shift is standardized by the pooled between-person SD of phase means. Euclidean distance between cycle vectors over their shared features, rescaled to the full dimension. Mean distance between a person's own cycles against the mean distance to other people's cycles, in the same participants. ICC(1) per feature from one-way ANOVA with unequal group sizes. Intervals from 5,000 participant resamples, BCa.
 - No hypothesis tests and no multiplicity adjustment. Every number is an estimate with an interval; counts of participants in each cell are stated.
+- **Figures.** DABEST forest plots draw each contrast's bootstrap as a half-violin with the estimate and its 95 % BCa interval. The whorlmap draws the bootstrap of Hedges' g inside each cell of the feature × contrast grid, the outer ring being the tail nearest zero and the centre the far tail. Colour and axis ranges are set from the plotted values so that no cell saturates, and the range is printed on the figure. Device signals are blue, symptoms orange, throughout.
 
 ## Disclosure
 
 - Every figure and table pools at least five participants; most pool 24 to 42.
 - No participant-level value, identifier, calendar date or free-text entry appears in this repository or on this site.
-- Figures made for this site are drawn from the cohort-level tables in `tables/` by `scripts/make_figures.py`. The code that reads the restricted dataset is released from a separate repository after review, as the data licence asks of code behind publications.
+- The repeatability and comparison figures are drawn from the cohort-level tables in `tables/` by `scripts/make_figures.py`; the cohort-shift figures are the analysis run's own, every element a cohort bootstrap. The code that reads the restricted dataset is released from a separate repository after review, as the data licence asks of code behind publications.
 
 ## Software
 

@@ -140,10 +140,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#the-numbers" id="toc-the-numbers" class="nav-link active" data-scroll-target="#the-numbers">The numbers</a></li>
-  <li><a href="#per-feature" id="toc-per-feature" class="nav-link" data-scroll-target="#per-feature">Per feature</a></li>
+  <li><a href="#per-signal" id="toc-per-signal" class="nav-link active" data-scroll-target="#per-signal">Per signal</a></li>
+  <li><a href="#vector-and-score" id="toc-vector-and-score" class="nav-link" data-scroll-target="#vector-and-score">Vector and score</a></li>
   <li><a href="#read-with" id="toc-read-with" class="nav-link" data-scroll-target="#read-with">Read with</a></li>
-  <li><a href="#next" id="toc-next" class="nav-link" data-scroll-target="#next">Next</a></li>
+  <li><a href="#the-earlier-check-17-features-on-the-between-person-scale" id="toc-the-earlier-check-17-features-on-the-between-person-scale" class="nav-link" data-scroll-target="#the-earlier-check-17-features-on-the-between-person-scale">The earlier check: 17 features on the between-person scale</a></li>
   </ul>
 </nav>
     </div>
@@ -153,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Does a person’s shift repeat?</h1>
-<p class="subtitle lead">One luteal − follicular vector per closed cycle, 17 features. Interval 2022, 24 participants with two or three cycles.</p>
+<p class="subtitle lead">The luteal − follicular shift of five device signals, closed cycles, interval 2022. Day noise separated from cycle-to-cycle and person-to-person variation.</p>
 </div>
 
 
@@ -170,17 +170,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Not detectably. The mean distance between one person’s own cycle vectors equals the mean distance to other people’s: ratio <strong>1.00 [0.92, 1.08]</strong> over 17 features, 0.97 [0.84, 1.10] over the six device signals. Per feature, resting heart rate is the one signal with a repeatable personal shift (ICC 0.61 [0.09, 0.86]). The wrist-temperature rise, the cohort’s most reliable, does not repeat within a person at this sampling density (ICC −0.02 [−0.34, 0.31]).</p>
+<p>Yes for resting heart rate, barely for wrist temperature. A three-level model of the daily values (person, cycle, day) splits each signal’s luteal shift into its parts. <strong>Resting heart rate</strong>: between-person SD <strong>1.9 bpm</strong> [0.7, 2.7] on a 3.0 bpm cohort shift, repeatability 0.49 [0.09, 0.83]; two of a person’s own cycles already outweigh the cohort mean. <strong>Wrist temperature</strong>: SD <strong>0.11 °C</strong> [0.04, 0.27] on a 0.28 °C shift, single-cycle repeatability 0.08, eleven cycles to break even. Over the five signals the personal part of the shift vector is small: R_vec <strong>0.07</strong> [−0.11, 0.27], 75 % of resamples positive.</p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A[42 participants&lt;br/&gt;3,698 labelled days] --&gt; B[87 closed cycles&lt;br/&gt;from menstrual onsets]
-    B --&gt; C[66 cycles with ≥ 3 days&lt;br/&gt;in both phases, 39 participants]
-    C --&gt; D[24 participants with ≥ 2 such cycles&lt;br/&gt;51 cycles, at most 3 each]
-    D --&gt; E[within 4.20 vs between 4.21&lt;br/&gt;ratio 1.00, 0.92 to 1.08]
+    A[42 participants&lt;br/&gt;3,698 labelled days] --&gt; M[Daily values, every closed cycle&lt;br/&gt;37–42 participants per signal]
+    M --&gt; V[person · cycle · day&lt;br/&gt;variance components]
+    A --&gt; S[One shift per closed cycle&lt;br/&gt;22 participants with ≥ 2 cycles]
+    S --&gt; D[Vector distances → R_vec&lt;br/&gt;responsiveness score → ICC]
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -189,12 +189,92 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="figures/F2_repeatability.png" class="img-fluid figure-img"></p>
-<figcaption>A: mean Euclidean distance between a person’s own cycle vectors and between her cycles and other people’s, 95 % BCa over 5,000 participant resamples. B: ICC(1) of each feature’s shift across a person’s cycles. Filled: device signals.</figcaption>
+<p><img src="figures/F4_rep03.png" class="img-fluid figure-img"></p>
+<figcaption>A: repeatability of each signal’s shift, with day noise removed (R_true) and for a single cycle (R_cycle). B: the share of a single cycle’s shift that comes from the person, the cycle and the day noise in a phase mean. C: the weight a person’s own m cycles deserve against the cohort shift; 0.5 is the break-even line.</figcaption>
 </figure>
 </div>
-<section id="the-numbers" class="level2">
-<h2 class="anchored" data-anchor-id="the-numbers">The numbers</h2>
+<section id="per-signal" class="level2">
+<h2 class="anchored" data-anchor-id="per-signal">Per signal</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Signal</th>
+<th>Cohort shift</th>
+<th>Between-person SD [95 %]</th>
+<th>Cycle SD</th>
+<th>Day SD</th>
+<th>Repeatability, day noise removed</th>
+<th>Single cycle</th>
+<th>Weight at 2, 3 cycles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resting heart rate (bpm)</td>
+<td>+3.0</td>
+<td><strong>1.9 [0.7, 2.7]</strong></td>
+<td>2.0</td>
+<td>1.7</td>
+<td><strong>0.49 [0.09, 0.83]</strong></td>
+<td>0.45</td>
+<td>0.62, 0.71</td>
+</tr>
+<tr class="even">
+<td>Nightly wrist temperature (°C)</td>
+<td>+0.28</td>
+<td><strong>0.11 [0.04, 0.27]</strong></td>
+<td>0.17</td>
+<td>0.58</td>
+<td>0.28 [0.03, 1.00]</td>
+<td>0.08</td>
+<td>0.15, 0.21</td>
+</tr>
+<tr class="odd">
+<td>Sleep breathing rate (/min)</td>
+<td>+0.53</td>
+<td>0.18 [0.04, 0.57]</td>
+<td>0.19</td>
+<td>0.93</td>
+<td>0.46 [0.03, 1.00]</td>
+<td>0.11</td>
+<td>0.19, 0.26</td>
+</tr>
+<tr class="even">
+<td>HRV, RMSSD (ms)</td>
+<td>−2.5</td>
+<td>3.1 [0.1, 8.0]</td>
+<td>2.8</td>
+<td>12.0</td>
+<td>0.55 [0.02, 1.00]</td>
+<td>0.18</td>
+<td>0.31, 0.40</td>
+</tr>
+<tr class="odd">
+<td>Daily mean glucose (mmol/L)</td>
+<td>+0.21</td>
+<td>0.10 [0.01, 0.31]</td>
+<td>0.45</td>
+<td>0.51</td>
+<td>0.05 [0.00, 0.59]</td>
+<td>0.04</td>
+<td>0.07, 0.10</td>
+</tr>
+</tbody>
+</table>
+<p>Intervals from 500 participant refits each, percentile. The upper limits of three repeatabilities reach 1.00 because a ratio’s interval is uninformative above when the cycle component can vanish in a resample; the lower limits carry the message.</p>
+</section>
+<section id="vector-and-score" class="level2">
+<h2 class="anchored" data-anchor-id="vector-and-score">Vector and score</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -204,143 +284,54 @@ ul.task-list li input[type="checkbox"] {
 <thead>
 <tr class="header">
 <th>Quantity</th>
-<th>17 features</th>
-<th>6 device signals</th>
+<th>Five device signals</th>
+<th>With sore breasts added</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Participants with ≥ 2 eligible closed cycles</td>
-<td>24 (51 cycles)</td>
-<td>22 (46 cycles)</td>
+<td>Participants with ≥ 2 closed cycles</td>
+<td>22 of 39</td>
+<td>21 of 39</td>
 </tr>
 <tr class="even">
-<td>Mean within-person distance</td>
-<td>4.20 [3.73, 4.79]</td>
-<td>2.03 [1.67, 2.61]</td>
+<td>Within / between distance ratio</td>
+<td>0.95 [0.81, 1.05]</td>
+<td>0.90 [0.76, 1.01]</td>
 </tr>
 <tr class="odd">
-<td>Mean between-person distance, same participants</td>
-<td>4.21 [3.88, 4.55]</td>
-<td>2.09 [1.82, 2.43]</td>
+<td><strong>R_vec</strong>, the personal share of the vector</td>
+<td><strong>0.07 [−0.11, 0.27]</strong></td>
+<td>0.16 [−0.06, 0.37]</td>
 </tr>
 <tr class="even">
-<td><strong>Ratio within / between</strong></td>
-<td><strong>1.00 [0.92, 1.08]</strong></td>
-<td><strong>0.97 [0.84, 1.10]</strong></td>
-</tr>
-<tr class="odd">
-<td>Between-person variance component, summed over features</td>
-<td>0 at the point estimate</td>
-<td>0.03 [0, 0.64]</td>
-</tr>
-<tr class="even">
-<td>Cycles at which personal data would beat the cohort mean</td>
-<td>not estimable</td>
-<td>not estimable</td>
+<td>Responsiveness score ICC</td>
+<td>0.42 [0.03, 0.68]</td>
+<td>0.45 [0.08, 0.69]</td>
 </tr>
 </tbody>
 </table>
-<p>Distances are in pooled between-person SD units summed over the features, so the two columns are not comparable with each other.</p>
-</section>
-<section id="per-feature" class="level2">
-<h2 class="anchored" data-anchor-id="per-feature">Per feature</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>ICC(1) [95 % BCa]</th>
-<th>Participants / cycles</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Resting heart rate</td>
-<td><strong>0.61 [0.09, 0.86]</strong></td>
-<td>14 / 29</td>
-</tr>
-<tr class="even">
-<td>Sore breasts</td>
-<td><strong>0.53 [0.20, 0.81]</strong></td>
-<td>24 / 50</td>
-</tr>
-<tr class="odd">
-<td>Cramps</td>
-<td>0.32 [−0.17, 0.71]</td>
-<td>24 / 50</td>
-</tr>
-<tr class="even">
-<td>Bloating</td>
-<td>0.30 [−0.11, 0.67]</td>
-<td>24 / 50</td>
-</tr>
-<tr class="odd">
-<td>Main sleep duration</td>
-<td>0.25 [−0.07, 0.59]</td>
-<td>24 / 50</td>
-</tr>
-<tr class="even">
-<td>HRV (RMSSD)</td>
-<td>0.23 [0.01, 0.61]</td>
-<td>19 / 38</td>
-</tr>
-<tr class="odd">
-<td>Mood swings, food cravings</td>
-<td>0.05, 0.02</td>
-<td>24 / 50</td>
-</tr>
-<tr class="even">
-<td>Nightly wrist temperature</td>
-<td><strong>−0.02 [−0.34, 0.31]</strong></td>
-<td>24 / 50</td>
-</tr>
-<tr class="odd">
-<td>Daily mean glucose</td>
-<td>−0.05 [−0.44, 0.35]</td>
-<td>21 / 43</td>
-</tr>
-<tr class="even">
-<td>Headaches, appetite, indigestion</td>
-<td>−0.10, −0.11, −0.11</td>
-<td>24 / 50</td>
-</tr>
-<tr class="odd">
-<td>Fatigue</td>
-<td>−0.27 [−0.57, 0.27]</td>
-<td>24 / 50</td>
-</tr>
-<tr class="even">
-<td>Sleep breathing rate</td>
-<td>−0.31 [−0.60, 0.09]</td>
-<td>19 / 38</td>
-</tr>
-<tr class="odd">
-<td>Stress</td>
-<td>−0.43 [−0.63, −0.10]</td>
-<td>24 / 50</td>
-</tr>
-<tr class="even">
-<td>Sleep issues</td>
-<td>−0.45 [−0.78, −0.11]</td>
-<td>24 / 50</td>
-</tr>
-</tbody>
-</table>
+<p>The score asks a narrower question than the vector: not whether a person’s whole shift pattern is her own, but whether the size of her shift along the shared direction is. It has the clearer answer.</p>
 </section>
 <section id="read-with" class="level2">
 <h2 class="anchored" data-anchor-id="read-with">Read with</h2>
 <ul>
-<li><strong>Two or three cycles per person, 24 people.</strong> An ICC from pairs has large sampling error; the ratio’s interval spans 0.92 to 1.08. This is what one three-month interval can show, not a statement about physiology.</li>
-<li><strong>Day-to-day noise attenuates every ICC.</strong> On synthetic data with a planted repeatability of 0.8, this estimator returned 0.36 to 0.56.</li>
-<li><strong>The scale compresses the device signals.</strong> Distances use the between-person spread of phase means as their unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift. With 17 equal-weight features, symptom noise dominates the vector.</li>
-<li><strong>Resting heart rate reaches 14 participants</strong> because a cycle needs three valid days in each phase and 782 of 3,698 days were coded 0.</li>
-<li>A negative ICC means two cycles of the same person differ more than two cycles of different people. With these intervals, stress and sleep issues are observations to carry, not findings.</li>
+<li><strong>Two or three cycles per person</strong>, 22 people for the vector; 21 to 34 with two or more cycles per signal for the model. Nothing here is a precise personal repeatability, only its presence for resting heart rate and its smallness for temperature.</li>
+<li><strong>Day noise dominates temperature</strong>: 71 % of a single cycle’s temperature shift is night-to-night noise in the phase means, 21 % cycle-to-cycle, 8 % the person. Glucose’s shift varies from cycle to cycle more than between people.</li>
+<li><strong>Sore breasts</strong>, the one symptom checked, is itself repeatable (SD 0.44 points [0.11, 0.62]); symptoms were reported while participants saw the app’s phase predictions.</li>
+<li>Closed cycles from menstrual onsets in the labels, 10–60 days; the short “Follicular” label is the reference; nothing uses the 2024 interval.</li>
 </ul>
 </section>
-<section id="next" class="level2">
-<h2 class="anchored" data-anchor-id="next">Next</h2>
-<p>A variance-component analysis of the five device signals that separates day-to-day noise from cycle-to-cycle and person-to-person variation, on the spread of the shifts themselves, with the number of cycles a person needs before her own data outweigh the cohort shift. Built and tested on synthetic data; the real run is pending.</p>
-<p>Tables: <a href="tables/feature_icc.csv"><code>tables/feature_icc.csv</code></a>, <a href="tables/repeatability_summary.json"><code>tables/repeatability_summary.json</code></a>. The between-person variance component was zero at the point estimate, so the crossing number of cycles is not estimable and is not in the file.</p>
+<section id="the-earlier-check-17-features-on-the-between-person-scale" class="level2">
+<h2 class="anchored" data-anchor-id="the-earlier-check-17-features-on-the-between-person-scale">The earlier check: 17 features on the between-person scale</h2>
+<p>Before the model above, a cruder check put all 17 features (six device signals and eleven symptoms) on a common scale, the between-person spread of phase means, and asked whether a person’s cycle vectors lie closer to each other than to other people’s. They did not: ratio 1.00 [0.92, 1.08] over 24 participants. On that scale a consistent 3 bpm shift against baselines that differ by 7 bpm between people counts for less than a one-point symptom shift, and the symptom noise swamps the device signals. Per feature, resting heart rate was already the one repeatable signal (ICC 0.61 [0.09, 0.86], 14 participants) and temperature already was not (−0.02 [−0.34, 0.31]).</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="figures/F2_repeatability.png" class="img-fluid figure-img"></p>
+<figcaption>Left: mean distance between a person’s own cycle vectors and to other people’s, 17 features. Right: per-feature ICC of the shift across a person’s cycles.</figcaption>
+</figure>
+</div>
+<p>Tables: <a href="tables/rep03_components.csv"><code>tables/rep03_components.csv</code></a>, <a href="tables/rep03_design_curve.csv"><code>tables/rep03_design_curve.csv</code></a>, <a href="tables/rep03_summary.json"><code>tables/rep03_summary.json</code></a>; the earlier check’s <a href="tables/feature_icc.csv"><code>tables/feature_icc.csv</code></a> and <a href="tables/repeatability_summary.json"><code>tables/repeatability_summary.json</code></a>.</p>
 
 
 </section>
