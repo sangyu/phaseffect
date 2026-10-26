@@ -19,7 +19,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 TABLES, FIGURES = ROOT / 'tables', ROOT / 'figures'
 INK, INK2, PAPER, GRID = '#1a1a1a', '#666666', '#fcfcfa', '#dddddd'
-BLUE, ORANGE = '#2a78d6', '#eb6834'                      # the run figures' palette: device signals blue, symptoms orange
+BLUE, ORANGE = '#2a78d6', '#eb6834'                      # the run figures' palette: device metrics blue, symptoms orange
 FAMILY = {'physiology': BLUE, 'symptom': ORANGE}
 CONTRASTS = ['Menstrual − Follicular', 'Fertility − Follicular', 'Luteal − Follicular']
 SHORT = {c: c.split(' ')[0] for c in CONTRASTS}
@@ -148,7 +148,7 @@ def f2():
     ax.set_xlabel("ICC(1) of the luteal − follicular shift across a person's cycles, 95 % BCa", fontsize=9)
     ax.grid(axis='x', color=GRID, lw=0.5)
     n_lo, n_hi = int(icc.n_participants.min()), int(icc.n_participants.max())
-    ax.set_title(f'B  Per feature, {n_lo}–{n_hi} participants (blue: device signals, orange: symptoms)', fontsize=9.5, loc='left', color=INK)
+    ax.set_title(f'B  Per feature, {n_lo}–{n_hi} participants (blue: device metrics, orange: symptoms)', fontsize=9.5, loc='left', color=INK)
 
     fig.suptitle("Does a person's luteal − follicular shift repeat across her cycles?  mcPHASES interval 2022, closed cycles",
                  x=0.01, y=0.99, ha='left', fontsize=11, color=INK)
@@ -203,62 +203,58 @@ def f3():
 
 
 def f4():
-    """REP-03: variance components of the luteal − follicular shift per device signal, from tables/rep03_*."""
+    """REP-03: variance components of the luteal − follicular shift per device metric, from tables/rep03_*."""
+    # Revised 2026-10-26 after the three-lens review: no variance-component intervals (anti-conservative at the boundary),
+    # no shrinkage weights, and fits whose person intercept-slope correlation is +-1 are marked singular, with their
+    # person/cycle split withheld.
     comp = pd.read_csv(TABLES / 'rep03_components.csv')
-    curve = pd.read_csv(TABLES / 'rep03_design_curve.csv')
-    s = json.loads((TABLES / 'rep03_summary.json').read_text())
     ok = comp[~comp.suppressed & comp.fit_ok].reset_index(drop=True)
-    styles = ['-', '--', '-.', ':', (0, (5, 1))]
+    ok['corr'] = ok.cov_u01 / np.sqrt(ok.var_u0.clip(lower=1e-300) * ok.var_u1.clip(lower=1e-300))
+    ok['singular'] = ok['corr'].abs() > 0.99
+    ok['status'] = np.where(ok['corr'].abs() > 0.99, 'singular fit', np.where(ok['corr'].abs() > 0.9, 'near-singular fit', 'interior fit'))
+    CANDIDATES = {'rhr'}          # the only metric the review kept as a candidate; all others are uninformative (erratum 3, REP-03)
+    ok['pct'] = 100 * ok.sd_u1 / ok.beta1.abs()
+    LIGHT, MID = '#9dc1ec', '#5d9be0'
 
-    fig = plt.figure(figsize=(13, 4.9))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.25, 1.0, 1.15], wspace=0.55)
+    def num(v):
+        return f'{v:.2f}' if abs(v) < 1 else f'{v:.1f}'
+
+    fig = plt.figure(figsize=(12, 4.6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.1, 1.0], wspace=0.35)
 
     ax = fig.add_subplot(gs[0, 0])
     for y, r in ok.iterrows():
-        for k, (col, mk) in enumerate((('R_true', 'o'), ('R_cycle', 's'))):
-            off = -0.16 if k == 0 else 0.16
-            lo, hi = r.get(f'{col}_lo', np.nan), r.get(f'{col}_hi', np.nan)
-            if np.isfinite(lo) and np.isfinite(hi):
-                ax.plot([lo, hi], [y + off, y + off], color=BLUE if k == 0 else INK2, lw=1.8, solid_capstyle='round')
-            ax.scatter([r[col]], [y + off], s=40, marker=mk, color=BLUE if k == 0 else PAPER, edgecolor=BLUE if k == 0 else INK2, lw=1.3, zorder=3)
-    ax.axvline(0, color=INK2, lw=0.8)
-    ax.set_yticks(range(len(ok))); ax.set_yticklabels(ok.label, fontsize=8.5); ax.set_ylim(len(ok) - 0.5, -0.5); ax.set_xlim(-0.05, 1.0)
-    ax.set_xlabel('repeatability of the luteal − follicular shift', fontsize=8.5); ax.grid(axis='x', color=GRID, lw=0.5)
-    handles = [Line2D([], [], marker='o', color=BLUE, lw=0, markersize=7, label='R_true, day noise removed'),
-               Line2D([], [], marker='s', color=INK2, markerfacecolor=PAPER, lw=0, markersize=7, label='R_cycle, a single cycle')]
-    ax.legend(handles=handles, frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=1)
-    ax.set_title('A  Repeatability per signal (95 % over participants)', fontsize=9.5, loc='left', color=INK)
+        if r.feature in CANDIDATES and r.status == 'interior fit':
+            ax.scatter([r.pct], [y], s=55, color=BLUE, zorder=3)
+            ax.text(r.pct, y + 0.32, f'candidate: {num(r.sd_u1)} {r.unit} on {num(abs(r.beta1))}', fontsize=7.5, color=INK, ha='center')
+        else:
+            ax.scatter([r.pct], [y], s=55, color=PAPER, edgecolor=INK2, lw=1.4, zorder=3)
+            ax.text(r.pct, y + 0.32, f'{r.status}: uninformative', fontsize=7.5, color=INK2, ha='center')
+    hi = float(ok.pct.max()) * 1.2
+    ax.set_xlim(0, hi); ax.set_ylim(len(ok) - 0.4, -0.6)
+    ax.set_yticks(range(len(ok))); ax.set_yticklabels(ok.label, fontsize=8.5)
+    ax.set_xlabel(f'between-person SD of the luteal shift, % of the cohort shift (axis 0–{hi:.0f} %)', fontsize=8.5); ax.grid(axis='x', color=GRID, lw=0.5)
+    ax.set_title('A  How much people may differ (point estimates; calibrated intervals pending)', fontsize=9.5, loc='left', color=INK)
 
     ax = fig.add_subplot(gs[0, 1])
     for y, r in ok.iterrows():
         tot = max(r.var_u1, 0) + max(r.var_v1, 0) + r.nu2
-        parts = [max(r.var_u1, 0) / tot, max(r.var_v1, 0) / tot, r.nu2 / tot] if tot > 0 else [0, 0, 1]
+        if r.status != 'interior fit':
+            parts = [((max(r.var_u1, 0) + max(r.var_v1, 0)) / tot, MID, 'person + cycle (split not identifiable)'), (r.nu2 / tot, GRID, 'day noise in a cycle mean')]
+        else:
+            parts = [(max(r.var_u1, 0) / tot, BLUE, 'between people'), (max(r.var_v1, 0) / tot, INK2, 'cycle to cycle'), (r.nu2 / tot, GRID, 'day noise in a cycle mean')]
         left = 0
-        for p, c, lab in zip(parts, (BLUE, INK2, GRID), ('between people', 'cycle to cycle', 'day noise in a cycle mean')):
-            ax.barh(y, p, left=left, color=c, edgecolor=PAPER, lw=0.6, label=lab if y == 0 else None); left += p
-    ax.set_yticks(range(len(ok))); ax.set_yticklabels([]); ax.set_ylim(len(ok) - 0.5, -0.5); ax.set_xlim(0, 1)
+        for p, c, lab in parts:
+            ax.barh(y, p, left=left, color=c, edgecolor=PAPER, lw=0.6, label=lab); left += p
+    h, l = ax.get_legend_handles_labels(); seen = dict(zip(l, h))
+    ax.legend(seen.values(), seen.keys(), frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=2)
+    ax.set_yticks(range(len(ok))); ax.set_yticklabels([]); ax.set_ylim(len(ok) - 0.4, -0.6); ax.set_xlim(0, 1)
     ax.set_xlabel("share of a single cycle's shift variance", fontsize=8.5)
-    ax.legend(frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=1)
-    ax.set_title("B  Where a cycle's shift varies", fontsize=9.5, loc='left', color=INK)
-
-    ax = fig.add_subplot(gs[0, 2])
-    for k, (f, g) in enumerate(curve.groupby('feature', sort=False)):
-        g = g.sort_values('cycles_observed')
-        lab = ok.loc[ok.feature == f, 'label'].iloc[0] if (ok.feature == f).any() else f
-        ax.plot(g.cycles_observed, g.w, color=BLUE, lw=1.6, ls=styles[k % len(styles)], label=lab)
-    ax.axhline(0.5, color=INK2, lw=0.8, ls=':')
-    ax.set_ylim(0, 1); ax.set_xticks(sorted(curve.cycles_observed.unique())); ax.set_xlabel('cycles observed for one person', fontsize=8.5)
-    ax.set_ylabel('weight on her own cycles', fontsize=8.5)
-    v, r = s['vector'], s['responsiveness']
-    ax.text(0.02, 0.97, f"five-signal vector: R_vec {v['R_vec']['point']:.2f} [{v['R_vec']['lo']:.2f}, {v['R_vec']['hi']:.2f}]\n"
-                        f"score ICC {r['icc']:.2f} [{r['icc_lo']:.2f}, {r['icc_hi']:.2f}]", transform=ax.transAxes, ha='left', va='top', fontsize=8, color=INK)
-    ax.legend(frameon=False, fontsize=7.5, loc='upper center', bbox_to_anchor=(0.5, -0.2), ncol=2)
-    ax.set_title('C  How much to trust her own cycles', fontsize=9.5, loc='left', color=INK)
+    ax.set_title("B  Where a single cycle's shift varies", fontsize=9.5, loc='left', color=INK)
 
     n_lo = int(ok.n_participants.min())
-    fig.suptitle("Does a person's luteal − follicular shift repeat across her cycles?  Five device signals, closed cycles, mcPHASES interval 2022\n"
-                 f"Cohort aggregates: the model pools {n_lo} or more participants per signal; the vector and score pool the {v['n_participants']} with ≥ 2 closed cycles; "
-                 "no participant-level value, identifier or date appears.",
+    fig.suptitle("Does a person's luteal − follicular shift persist across her cycles?  Five device metrics, closed cycles, mcPHASES interval 2022\n"
+                 f"Cohort aggregates over {n_lo} or more participants per metric; no participant-level value, identifier or date appears.",
                  x=0.01, y=1.06, ha='left', fontsize=10, color=INK)
     out = FIGURES / 'F4_rep03.png'
     fig.savefig(out, dpi=170, bbox_inches='tight', facecolor=PAPER)

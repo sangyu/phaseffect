@@ -3,9 +3,9 @@ title: "Prior findings on this dataset"
 subtitle: "Every work that has used mcPHASES, as of October 2026, and what each established"
 ---
 
-Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. No published work reports a within-person effect with its uncertainty, a cross-signal concordance, or anything anchored on the 2024 progesterone metabolite. This page is the context for the [findings](cohort-shifts.qmd) here; figures reproduced from other works carry their own licence, stated in the caption.
+Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a cross-metric concordance, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Within-person luteal changes in these metrics are well established in other wearable studies: sleeping pulse rate ([Shilaih et al. 2017](https://doi.org/10.1038/s41598-017-01433-9)), wrist temperature, heart rate, HRV and breathing rate ([Goodale et al. 2019](https://doi.org/10.2196/13404)), and lower vagal activity in the luteal phase across 37 studies ([Schmalenberger et al. 2019](https://doi.org/10.3390/jcm8111946)). Ribeiro's 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the [findings](cohort-shifts.qmd) here; figures reproduced from other works carry their own licence, stated in the caption.
 
-![Which signals each work used. Rows in date order; colour is the analysis type. Blue rows are the only ones that report an effect in physical units.](figures/O1_work_signal_matrix.png)
+![Which metrics each work used. Rows in date order; colour is the analysis type. Blue rows are the only ones that report an effect in physical units.](figures/O1_work_signal_matrix.png)
 
 ## Inventory
 
@@ -31,9 +31,9 @@ Seventeen formal works and about twenty-five repositories touch the dataset. Eve
 
 Grey literature (repository READMEs, not reproduced): leave-one-subject-out four-phase classifiers in which cycle day carries most of the signal (macro-F1 0.643 from cycle day vs 0.363 from physiology); a 2022 → 2024 distribution shift (KS = 0.322); an LH-aligned clustering of physiology that found no consistent clusters.
 
-## What is established, signal by signal
+## What is established, metric by metric
 
-| Signal | Published finding | Source | Not published |
+| Metric | Published finding | Source | Not published |
 |---|---|---|---|
 | Glucose | Biphasic over the cycle; luteal − late-follicular β = 0.15 [0.09, 0.20] mmol/L | 1 | Per-person size; repeatability |
 | Wrist temperature | Group means by phase 33.9 / 33.7 / 33.8 / 34.0 °C; peak 7.6 ± 4.8 d after the LH peak | 2, 8 | Effect in °C with an interval; per-person shift |
@@ -54,9 +54,9 @@ Grey literature (repository READMEs, not reproduced): leave-one-subject-out four
 
 ## Published results beside the estimates here
 
-![Reference phases differ (late-follicular in the papers, the hormone app's shorter "Follicular" label here) and the cohorts differ (49 and 45 vs 42 participants), so this is a same-direction check, not a replication.](figures/F3_published_vs_this_site.png)
+![The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the cohorts differ (49 and 45 against 42 participants) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.](figures/F3_published_vs_this_site.png)
 
-| Signal, luteal − follicular | Published | This site | Agreement |
+| Metric, luteal − follicular | Published | This site | Agreement |
 |---|---|---|---|
 | Glucose | β 0.15 [0.09, 0.20] mmol/L, 49 participants | +0.16 [0.06, 0.27], 40 | Same direction and size |
 | Wrist temperature | 34.0 vs 33.7 °C, no interval, 45 | +0.23 [0.12, 0.31] °C, 42 | Same direction and size |
@@ -82,6 +82,8 @@ Grey literature (repository READMEs, not reproduced): leave-one-subject-out four
 |---|---|---|
 | Lin 2023 | CC BY 4.0 | Figure reproduced with attribution |
 | Lin 2024, Lin 2026 descriptor | CC BY-NC-ND 4.0 | One figure reproduced without change, non-commercial |
-| Kogelman 2026, Specht 2026 | CC BY | Figure reproduced with attribution |
+| Kogelman 2026 | CC BY | Figure reproduced with attribution |
+| Specht 2026 | CC BY | Numbers only |
 | arXiv works | CC BY 4.0 | Numbers only |
-| Goyal 2026, Nsugbe & Lin 2026, Xu 2026 | not stated or inaccessible | Numbers from the abstract only |
+| Nsugbe & Lin 2026 | CC BY 4.0 (full text not accessible) | Numbers from the abstract only |
+| Goyal 2026, Xu 2026 | not stated or inaccessible | Numbers from the abstract only |

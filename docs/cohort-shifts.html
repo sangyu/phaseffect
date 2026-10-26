@@ -136,9 +136,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#device-signals" id="toc-device-signals" class="nav-link active" data-scroll-target="#device-signals">Device signals</a></li>
+  <li><a href="#device-metrics" id="toc-device-metrics" class="nav-link active" data-scroll-target="#device-metrics">Device metrics</a></li>
   <li><a href="#symptoms-points-on-the-05-scale" id="toc-symptoms-points-on-the-05-scale" class="nav-link" data-scroll-target="#symptoms-points-on-the-05-scale">Symptoms, points on the 0–5 scale</a></li>
-  <li><a href="#standardized-to-compare-across-signals" id="toc-standardized-to-compare-across-signals" class="nav-link" data-scroll-target="#standardized-to-compare-across-signals">Standardized, to compare across signals</a></li>
+  <li><a href="#standardized-to-compare-across-metrics" id="toc-standardized-to-compare-across-metrics" class="nav-link" data-scroll-target="#standardized-to-compare-across-metrics">Standardized, to compare across metrics</a></li>
   <li><a href="#read-with" id="toc-read-with" class="nav-link" data-scroll-target="#read-with">Read with</a></li>
   </ul>
 </nav>
@@ -166,15 +166,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Positive means higher than on the participant’s own follicular days. Paired mean differences with 95 % bias-corrected bootstrap intervals over 5,000 participant resamples (<a href="./methods.html">methods</a>). The luteal phase moves every device signal in the same participants; menses moves the symptoms.</p>
+<p>Positive means higher than on the participant’s own follicular days. Paired mean differences with 95 % bias-corrected bootstrap intervals over 5,000 participant resamples (<a href="./methods.html">methods</a>). In the same participants the luteal phase moves five of the six device metrics (sleep duration does not change); menses moves the symptoms. These contrasts agree in direction with published wearable studies (<a href="https://doi.org/10.1038/s41598-017-01433-9">Shilaih et al.&nbsp;2017</a>; <a href="https://doi.org/10.2196/13404">Goodale et al.&nbsp;2019</a>; <a href="https://doi.org/10.3390/jcm8111946">Schmalenberger et al.&nbsp;2019</a>); what is new here is their size, in native units with intervals, for this dataset.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="figures/P1_phenovector_forest.png" class="img-fluid figure-img"></p>
-<figcaption>Shifts in native units with their bootstraps. Top: six device signals, each on its own scale, three contrasts per signal. Bottom: eleven diary symptoms in points on their 0–5 scale, one panel per contrast. Half-violin: the bootstrap distribution of the paired mean difference over 5,000 participant resamples; dot and bar: the estimate with its 95 % BCa interval; the number is the estimate.</figcaption>
+<figcaption>Shifts in native units with their bootstraps. Top: six device metrics, each on its own scale, three contrasts per metric. Bottom: eleven diary symptoms in points on their 0–5 scale, one panel per contrast. Half-violin: the bootstrap distribution of the paired mean difference over 5,000 participant resamples; dot and bar: the estimate with its 95 % BCa interval; the number is the estimate.</figcaption>
 </figure>
 </div>
-<section id="device-signals" class="level2">
-<h2 class="anchored" data-anchor-id="device-signals">Device signals</h2>
+<section id="device-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="device-metrics">Device metrics</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 16%">
@@ -186,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Signal</th>
+<th>Metric</th>
 <th>n</th>
 <th>Menstrual − Follicular</th>
 <th>Fertility − Follicular</th>
@@ -333,8 +333,8 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="standardized-to-compare-across-signals" class="level2">
-<h2 class="anchored" data-anchor-id="standardized-to-compare-across-signals">Standardized, to compare across signals</h2>
+<section id="standardized-to-compare-across-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-to-compare-across-metrics">Standardized, to compare across metrics</h2>
 <p>Hedges’ g uses the spread of participants’ phase means as its unit, so a consistent 3 bpm shift against baselines that differ by 7 bpm between people scores lower than a one-point symptom shift against baselines that differ by less than a point. Use it to compare cells, not to size an effect.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
@@ -358,9 +358,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="read-with" class="level2">
 <h2 class="anchored" data-anchor-id="read-with">Read with</h2>
 <ul>
-<li><strong>Reference phase.</strong> Mira’s “Follicular” label is short (median 6 days) and excludes menses and the fertile window. Published contrasts use a late-follicular reference, so agreement with them is same-direction, not replication.</li>
-<li><strong>Open cycles included.</strong> Days in cycles that never closed count towards their labelled phase; a closed-cycle sensitivity run is pending.</li>
-<li><strong>Multiplicity.</strong> 51 cells, no adjustment. 36 exclude zero; two or three would by chance. Symptom cells are strongly correlated with each other.</li>
+<li><strong>Reference phase.</strong> The app’s “Follicular” label is the late-follicular phase, from the last day of flow to the first day of the fertile window, the same definition the dataset’s papers use. In this release it is short (median 6 labelled days, against 7.7–11 days in the papers), and the cohort and estimators differ, so agreement with the papers is same-direction, not replication.</li>
+<li><strong>Open cycles included.</strong> Days in cycles that never closed count towards their labelled phase. Restricted to closed cycles, the luteal contrasts agree for resting heart rate (+3.0 bpm), temperature (+0.28 °C), glucose (+0.21 mmol/L) and breathing rate (+0.53 /min); HRV is smaller there (−2.5 ms against −3.9), so its size depends on that choice.</li>
+<li><strong>Multiplicity.</strong> 51 cells, no adjustment. 30 exclude zero; two or three would by chance. Symptom cells are strongly correlated with each other.</li>
 <li><strong>Not blind.</strong> Participants saw the app’s phase predictions while reporting symptoms.</li>
 <li><strong>Data handling.</strong> 782 of 3,698 resting-heart-rate days were coded 0 and treated as missing; two participants’ glucose was converted from mg/dL; 16 of 3,258 temperature nights were dropped as artefacts.</li>
 </ul>

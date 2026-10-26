@@ -18,16 +18,19 @@ flowchart LR
     M --> P[Paired within participant<br/>Menstrual, Fertility, Luteal − Follicular]
     P --> E[Paired mean difference and Hedges' g<br/>95 % BCa, 5,000 participant resamples]
     Q --> C[Closed cycles from menstrual onsets<br/>in the phase labels, 10–60 days]
-    C --> V[One luteal − follicular vector per cycle<br/>17 features in pooled-SD units]
-    V --> D[Within- vs between-person distances<br/>ICC per feature, participant bootstrap]
+    C --> A[Three-level REML model of daily values<br/>person, cycle and day components of the luteal contrast]
+    C --> V[One luteal − follicular vector per cycle<br/>five device metrics, total-SD units]
+    V --> D[Distance-based repeatability R_vec]
 ```
 
 ## Statistics
 
-- **Cohort shifts.** DABEST paired mean difference and Hedges' g with 95 % bias-corrected and accelerated bootstrap intervals over participants (5,000 resamples). Native units are primary; g only to compare cells across signals.
-- **Repeatability.** Each closed cycle's luteal − follicular shift is standardized by the pooled between-person SD of phase means. Euclidean distance between cycle vectors over their shared features, rescaled to the full dimension. Mean distance between a person's own cycles against the mean distance to other people's cycles, in the same participants. ICC(1) per feature from one-way ANOVA with unequal group sizes. Intervals from 5,000 participant resamples, BCa.
-- No hypothesis tests and no multiplicity adjustment. Every number is an estimate with an interval; counts of participants in each cell are stated.
-- **Figures.** DABEST forest plots draw each contrast's bootstrap as a half-violin with the estimate and its 95 % BCa interval. The whorlmap draws the bootstrap of Hedges' g inside each cell of the feature × contrast grid, the outer ring being the tail nearest zero and the centre the far tail. Colour and axis ranges are set from the plotted values so that no cell saturates, and the range is printed on the figure. Device signals are blue, symptoms orange, throughout.
+- **Cohort shifts.** DABEST paired mean difference and Hedges' g with 95 % bias-corrected and accelerated bootstrap intervals over participants (5,000 resamples). Native units are primary; g only to compare cells across metrics.
+- **Persistence of a person's contrast.** Per device metric, a linear mixed model of daily values fitted by REML (statsmodels): fixed luteal indicator; participant random intercept and luteal slope (correlated); cycle-within-participant intercept and luteal-slope variance components; day residuals. The between-person SD of the luteal slope is the quantity of interest: repeatability of a random slope in the sense of [Araya-Ajoy et al. (2015)](https://doi.org/10.1111/2041-210X.12430) and [Schielzeth & Nakagawa (2022)](https://doi.org/10.1111/2041-210X.13856), within the general repeatability framework of [Nakagawa & Schielzeth (2010)](https://doi.org/10.1111/j.1469-185X.2010.00141.x). Fits whose person intercept–slope correlation is ±1 are reported as singular and uninformative. Bootstrap intervals for the variance components are withheld because a variance at its boundary makes them invalid; calibrated inference by simulating the null on the same design, after [Crainiceanu & Ruppert (2004)](https://doi.org/10.1111/j.1467-9868.2004.00438.x), is in progress.
+- **Vector repeatability.** Each closed cycle's five-metric contrast is divided per metric by the total SD of cycle contrasts; R_vec = 1 − mean squared within-person distance / mean squared between-person distance over the 22 participants with two or more cycles. This is the distance-based ICC of [Xu, Reiss & Cribben (2021)](https://doi.org/10.1111/biom.13287), equivalent for Euclidean distances to I2C2 ([Shou et al. 2013](https://doi.org/10.3758/s13415-013-0196-0)).
+- **Earlier check.** The same question over 17 features on the between-person scale, with ICC(1) per feature, BCa intervals from 5,000 participant resamples.
+- No hypothesis tests and no multiplicity adjustment for the cohort contrasts. Estimates come with intervals except where an interval is known to be miscalibrated, which is stated where it happens.
+- **Figures.** DABEST forest plots draw each contrast's bootstrap as a half-violin with the estimate and its 95 % BCa interval. The whorlmap draws the bootstrap of Hedges' g inside each cell of the feature × contrast grid, the outer ring being the tail nearest zero and the centre the far tail. Colour and axis ranges are set from the plotted values so that no cell saturates, and the range is printed on the figure. Device metrics are blue, symptoms orange, throughout.
 
 ## Disclosure
 
@@ -37,4 +40,4 @@ flowchart LR
 
 ## Software
 
-Python 3.12, pandas 2.2, numpy 2.1, DABEST 2025.10.20, matplotlib 3.10; Quarto 1.8 for this site.
+Python 3.12, pandas 2.2, numpy 2.1, DABEST 2025.10.20, statsmodels 0.14.6, matplotlib 3.10; Quarto 1.8 for this site.

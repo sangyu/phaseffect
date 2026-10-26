@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul class="collapse">
   <li><a href="#inventory" id="toc-inventory" class="nav-link active" data-scroll-target="#inventory">Inventory</a></li>
-  <li><a href="#what-is-established-signal-by-signal" id="toc-what-is-established-signal-by-signal" class="nav-link" data-scroll-target="#what-is-established-signal-by-signal">What is established, signal by signal</a></li>
+  <li><a href="#what-is-established-metric-by-metric" id="toc-what-is-established-metric-by-metric" class="nav-link" data-scroll-target="#what-is-established-metric-by-metric">What is established, metric by metric</a></li>
   <li><a href="#published-figures-worth-knowing" id="toc-published-figures-worth-knowing" class="nav-link" data-scroll-target="#published-figures-worth-knowing">Published figures worth knowing</a></li>
   <li><a href="#published-results-beside-the-estimates-here" id="toc-published-results-beside-the-estimates-here" class="nav-link" data-scroll-target="#published-results-beside-the-estimates-here">Published results beside the estimates here</a></li>
   <li><a href="#data-hazards-reported-by-prior-users" id="toc-data-hazards-reported-by-prior-users" class="nav-link" data-scroll-target="#data-hazards-reported-by-prior-users">Data hazards reported by prior users</a></li>
@@ -168,11 +168,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. No published work reports a within-person effect with its uncertainty, a cross-signal concordance, or anything anchored on the 2024 progesterone metabolite. This page is the context for the <a href="./cohort-shifts.html">findings</a> here; figures reproduced from other works carry their own licence, stated in the caption.</p>
+<p>Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a cross-metric concordance, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Within-person luteal changes in these metrics are well established in other wearable studies: sleeping pulse rate (<a href="https://doi.org/10.1038/s41598-017-01433-9">Shilaih et al.&nbsp;2017</a>), wrist temperature, heart rate, HRV and breathing rate (<a href="https://doi.org/10.2196/13404">Goodale et al.&nbsp;2019</a>), and lower vagal activity in the luteal phase across 37 studies (<a href="https://doi.org/10.3390/jcm8111946">Schmalenberger et al.&nbsp;2019</a>). Ribeiro’s 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the <a href="./cohort-shifts.html">findings</a> here; figures reproduced from other works carry their own licence, stated in the caption.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="figures/O1_work_signal_matrix.png" class="img-fluid figure-img"></p>
-<figcaption>Which signals each work used. Rows in date order; colour is the analysis type. Blue rows are the only ones that report an effect in physical units.</figcaption>
+<figcaption>Which metrics each work used. Rows in date order; colour is the analysis type. Blue rows are the only ones that report an effect in physical units.</figcaption>
 </figure>
 </div>
 <section id="inventory" class="level2">
@@ -329,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p>Grey literature (repository READMEs, not reproduced): leave-one-subject-out four-phase classifiers in which cycle day carries most of the signal (macro-F1 0.643 from cycle day vs 0.363 from physiology); a 2022 → 2024 distribution shift (KS = 0.322); an LH-aligned clustering of physiology that found no consistent clusters.</p>
 </section>
-<section id="what-is-established-signal-by-signal" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-established-signal-by-signal">What is established, signal by signal</h2>
+<section id="what-is-established-metric-by-metric" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-established-metric-by-metric">What is established, metric by metric</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -340,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Signal</th>
+<th>Metric</th>
 <th>Published finding</th>
 <th>Source</th>
 <th>Not published</th>
@@ -424,7 +424,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="figures/F3_published_vs_this_site.png" class="img-fluid figure-img"></p>
-<figcaption>Reference phases differ (late-follicular in the papers, the hormone app’s shorter “Follicular” label here) and the cohorts differ (49 and 45 vs 42 participants), so this is a same-direction check, not a replication.</figcaption>
+<figcaption>The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the cohorts differ (49 and 45 against 42 participants) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.</figcaption>
 </figure>
 </div>
 <table class="caption-top table">
@@ -436,7 +436,7 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Signal, luteal − follicular</th>
+<th>Metric, luteal − follicular</th>
 <th>Published</th>
 <th>This site</th>
 <th>Agreement</th>
@@ -557,17 +557,27 @@ ul.task-list li input[type="checkbox"] {
 <td>One figure reproduced without change, non-commercial</td>
 </tr>
 <tr class="odd">
-<td>Kogelman 2026, Specht 2026</td>
+<td>Kogelman 2026</td>
 <td>CC BY</td>
 <td>Figure reproduced with attribution</td>
 </tr>
 <tr class="even">
+<td>Specht 2026</td>
+<td>CC BY</td>
+<td>Numbers only</td>
+</tr>
+<tr class="odd">
 <td>arXiv works</td>
 <td>CC BY 4.0</td>
 <td>Numbers only</td>
 </tr>
+<tr class="even">
+<td>Nsugbe &amp; Lin 2026</td>
+<td>CC BY 4.0 (full text not accessible)</td>
+<td>Numbers from the abstract only</td>
+</tr>
 <tr class="odd">
-<td>Goyal 2026, Nsugbe &amp; Lin 2026, Xu 2026</td>
+<td>Goyal 2026, Xu 2026</td>
 <td>not stated or inaccessible</td>
 <td>Numbers from the abstract only</td>
 </tr>
