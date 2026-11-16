@@ -168,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a cross-metric concordance, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Within-person luteal changes in these metrics are well established in other wearable studies: sleeping pulse rate (<a href="https://doi.org/10.1038/s41598-017-01433-9">Shilaih et al.&nbsp;2017</a>), wrist temperature, heart rate, HRV and breathing rate (<a href="https://doi.org/10.2196/13404">Goodale et al.&nbsp;2019</a>), and lower vagal activity in the luteal phase across 37 studies (<a href="https://doi.org/10.3390/jcm8111946">Schmalenberger et al.&nbsp;2019</a>). Ribeiro’s 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the <a href="./cohort-shifts.html">findings</a> here; figures reproduced from other works carry their own licence, stated in the caption.</p>
+<p>Eighteen formal works (as of 6 November 2026) and about twenty-five repositories touch the dataset. Everything physiological that is published is a cohort-level contrast (glucose from a participant-level mixed model with an interval; wrist temperature and resting heart rate as group means or an ANOVA), a hormone-coupling model, a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a within-person concordance of phase contrasts across metrics, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Luteal changes in these metrics are well established in other cohorts: sleeping pulse rate (<a href="https://doi.org/10.1038/s41598-017-01433-9">Shilaih et al.&nbsp;2017</a>); wrist temperature, heart rate and breathing rate (<a href="https://doi.org/10.2196/13404">Goodale et al.&nbsp;2019</a>); resting heart rate, breathing rate and HRV in 7,279 Fitbit and Pixel Watch users (<a href="https://doi.org/10.1177/17455057261503611">Heneghan et al.&nbsp;2026</a>) and HRV amplitude in a large WHOOP cohort (<a href="https://doi.org/10.1038/s41746-024-01394-0">Jasinski et al.&nbsp;2024</a>); and lower vagal activity in the luteal phase across 37 mostly laboratory studies (<a href="https://doi.org/10.3390/jcm8111946">Schmalenberger et al.&nbsp;2019</a>). Ribeiro’s 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the <a href="./cohort-shifts.html">findings</a> here; figures reproduced from other works carry their own licence, stated in the caption.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="figures/O1_work_signal_matrix.png" class="img-fluid figure-img"></p>
@@ -325,6 +325,14 @@ ul.task-list li input[type="checkbox"] {
 <td>41</td>
 <td>An optional LH-test input narrows the 80 % next-period window from ≈ 12 to ≈ 7 days</td>
 </tr>
+<tr class="even">
+<td>18</td>
+<td><a href="https://doi.org/10.21203/rs.3.rs-10634632/v1">Mexia Diaz et al.&nbsp;2026, CHARM</a></td>
+<td>Research Square, 2026-11</td>
+<td>representation learning</td>
+<td>42, 184 cycles</td>
+<td>Phase supervision raises hormone recovery R²: PdG 0.158 → 0.217; no phase contrast</td>
+</tr>
 </tbody>
 </table>
 <p>Grey literature (repository READMEs, not reproduced): leave-one-subject-out four-phase classifiers in which cycle day carries most of the signal (macro-F1 0.643 from cycle day vs 0.363 from physiology); a 2022 → 2024 distribution shift (KS = 0.322); an LH-aligned clustering of physiology that found no consistent clusters.</p>
@@ -379,7 +387,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>Symptoms</td>
-<td>Luteal vs late-follicular on a probit scale: cramps +0.94, sore breasts +0.97, bloating +0.38; symptom ICCs 0.21–0.66</td>
+<td>Luteal vs late-follicular on a probit scale: cramps +0.94, sore breasts +0.97, bloating +0.38; symptom ICCs up to 0.66 (indigestion; cramps 0.34), the person’s share of daily symptom levels, not of phase shifts</td>
 <td>1, 13, 9</td>
 <td>—</td>
 </tr>
@@ -424,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="figures/F3_published_vs_this_site.png" class="img-fluid figure-img"></p>
-<figcaption>The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the cohorts differ (49 and 45 against 42 participants) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.</figcaption>
+<figcaption>The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the samples overlap (49 and 45 participants of the same study, at least 41 and 37 of them among these 42) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.</figcaption>
 </figure>
 </div>
 <table class="caption-top table">
@@ -447,19 +455,19 @@ ul.task-list li input[type="checkbox"] {
 <td>Glucose</td>
 <td>β 0.15 [0.09, 0.20] mmol/L, 49 participants</td>
 <td>+0.16 [0.06, 0.27], 40</td>
-<td>Same direction and size</td>
+<td>Same direction and size, on overlapping participants: corroboration, not replication</td>
 </tr>
 <tr class="even">
 <td>Wrist temperature</td>
 <td>34.0 vs 33.7 °C, no interval, 45</td>
 <td>+0.23 [0.12, 0.31] °C, 42</td>
-<td>Same direction and size</td>
+<td>Same direction and size, on overlapping participants</td>
 </tr>
 <tr class="odd">
 <td>Resting heart rate</td>
 <td>F(3, 123) = 10.26, no bpm</td>
 <td>+3.0 [2.2, 3.8] bpm, 42</td>
-<td>Direction agrees; size unpublished</td>
+<td>Direction agrees; size unpublished (same participants)</td>
 </tr>
 <tr class="even">
 <td>Breathing rate, HRV</td>
@@ -471,7 +479,7 @@ ul.task-list li input[type="checkbox"] {
 <td>Heterogeneity</td>
 <td>E3G-coupling spread not above null</td>
 <td>personal shift vector not detectable over 2–3 cycles</td>
-<td>Both say person differences are hard to see with few cycles</td>
+<td>Both say person differences are hard to see with few cycles; resting heart rate is the one candidate here</td>
 </tr>
 </tbody>
 </table>

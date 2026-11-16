@@ -3,7 +3,7 @@ title: "Prior findings on this dataset"
 subtitle: "Every work that has used mcPHASES, as of October 2026, and what each established"
 ---
 
-Seventeen formal works and about twenty-five repositories touch the dataset. Everything physiological that is published is a pooled group contrast (glucose, wrist temperature, resting heart rate), a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a cross-metric concordance, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Within-person luteal changes in these metrics are well established in other wearable studies: sleeping pulse rate ([Shilaih et al. 2017](https://doi.org/10.1038/s41598-017-01433-9)), wrist temperature, heart rate, HRV and breathing rate ([Goodale et al. 2019](https://doi.org/10.2196/13404)), and lower vagal activity in the luteal phase across 37 studies ([Schmalenberger et al. 2019](https://doi.org/10.3390/jcm8111946)). Ribeiro's 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the [findings](cohort-shifts.qmd) here; figures reproduced from other works carry their own licence, stated in the caption.
+Eighteen formal works (as of 6 November 2026) and about twenty-five repositories touch the dataset. Everything physiological that is published is a cohort-level contrast (glucose from a participant-level mixed model with an interval; wrist temperature and resting heart rate as group means or an ANOVA), a hormone-coupling model, a classifier score, or a symptom model. For this dataset, no published work reports resting-heart-rate, breathing-rate or HRV phase contrasts in native units, splits a phase contrast into person, cycle and day variation, reports a within-person concordance of phase contrasts across metrics, or anchors an analysis on the 2024 progesterone metabolite (one public code repository has begun to). Luteal changes in these metrics are well established in other cohorts: sleeping pulse rate ([Shilaih et al. 2017](https://doi.org/10.1038/s41598-017-01433-9)); wrist temperature, heart rate and breathing rate ([Goodale et al. 2019](https://doi.org/10.2196/13404)); resting heart rate, breathing rate and HRV in 7,279 Fitbit and Pixel Watch users ([Heneghan et al. 2026](https://doi.org/10.1177/17455057261503611)) and HRV amplitude in a large WHOOP cohort ([Jasinski et al. 2024](https://doi.org/10.1038/s41746-024-01394-0)); and lower vagal activity in the luteal phase across 37 mostly laboratory studies ([Schmalenberger et al. 2019](https://doi.org/10.3390/jcm8111946)). Ribeiro's 2026 audit has already tested between-person heterogeneity in this dataset, for a different quantity (E3G coupling). This page is the context for the [findings](cohort-shifts.qmd) here; figures reproduced from other works carry their own licence, stated in the caption.
 
 ![Which metrics each work used. Rows in date order; colour is the analysis type. Blue rows are the only ones that report an effect in physical units.](figures/O1_work_signal_matrix.png)
 
@@ -28,6 +28,7 @@ Seventeen formal works and about twenty-five repositories touch the dataset. Eve
 | 15 | [Goyal 2026](https://doi.org/10.65161/rec1dcfwy5ynnqavi) | Oxford J Student Scholarship, 2026-09 | classifier | 30 | Bleeding-day ROC-AUC from cycle history alone 0.822; symptoms and wearables did not add |
 | 16 | [Nsugbe & Lin 2026](https://doi.org/10.1002/jim4.70057) | J Intell Med, 2026-09 | classifier | 42, 126 cycles | Multimodal − best unimodal: median +0.0156 macro-F1 |
 | 17 | [Dutta 2026, aadya-m1](https://doi.org/10.5281/zenodo.23183872) | Zenodo, 2026-10 | forecaster | 41 | An optional LH-test input narrows the 80 % next-period window from ≈ 12 to ≈ 7 days |
+| 18 | [Mexia Diaz et al. 2026, CHARM](https://doi.org/10.21203/rs.3.rs-10634632/v1) | Research Square, 2026-11 | representation learning | 42, 184 cycles | Phase supervision raises hormone recovery R²: PdG 0.158 → 0.217; no phase contrast |
 
 Grey literature (repository READMEs, not reproduced): leave-one-subject-out four-phase classifiers in which cycle day carries most of the signal (macro-F1 0.643 from cycle day vs 0.363 from physiology); a 2022 → 2024 distribution shift (KS = 0.322); an LH-aligned clustering of physiology that found no consistent clusters.
 
@@ -40,7 +41,7 @@ Grey literature (repository READMEs, not reproduced): leave-one-subject-out four
 | Resting heart rate | ANOVA across phases; lowest in follicular, highest in luteal (boxplots only) | 8 | Any size in bpm |
 | HRV, breathing rate, sleep | Classifier features only | 11, 16 | Any phase estimate |
 | Phase lengths | Median cycle 31 d; menstrual 6, late-follicular 11, luteal 14; ICCs 0.26 / 0.31 / 0.51 / 0.25 | 13 | — |
-| Symptoms | Luteal vs late-follicular on a probit scale: cramps +0.94, sore breasts +0.97, bloating +0.38; symptom ICCs 0.21–0.66 | 1, 13, 9 | — |
+| Symptoms | Luteal vs late-follicular on a probit scale: cramps +0.94, sore breasts +0.97, bloating +0.38; symptom ICCs up to 0.66 (indigestion; cramps 0.34), the person's share of daily symptom levels, not of phase shifts | 1, 13, 9 | — |
 | Heterogeneity | Between-person spread of E3G-coupling slopes not larger than a phase-randomised null | 14 | — |
 | 2022 → 2024 | Feature distributions shift; physiology-only phase accuracy falls | grey | Any confirmatory use of 2024 |
 
@@ -54,15 +55,15 @@ Grey literature (repository READMEs, not reproduced): leave-one-subject-out four
 
 ## Published results beside the estimates here
 
-![The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the cohorts differ (49 and 45 against 42 participants) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.](figures/F3_published_vs_this_site.png)
+![The papers and this site use the same app-defined late-follicular phase (last day of flow to the first day of the fertile window), but it is shorter in this release (median 6 labelled days, against 7.7–11 days in the papers), the samples overlap (49 and 45 participants of the same study, at least 41 and 37 of them among these 42) and so do the estimators (mixed model or group means against paired participant means). This is a same-direction check, not a replication.](figures/F3_published_vs_this_site.png)
 
 | Metric, luteal − follicular | Published | This site | Agreement |
 |---|---|---|---|
-| Glucose | β 0.15 [0.09, 0.20] mmol/L, 49 participants | +0.16 [0.06, 0.27], 40 | Same direction and size |
-| Wrist temperature | 34.0 vs 33.7 °C, no interval, 45 | +0.23 [0.12, 0.31] °C, 42 | Same direction and size |
-| Resting heart rate | F(3, 123) = 10.26, no bpm | +3.0 [2.2, 3.8] bpm, 42 | Direction agrees; size unpublished |
+| Glucose | β 0.15 [0.09, 0.20] mmol/L, 49 participants | +0.16 [0.06, 0.27], 40 | Same direction and size, on overlapping participants: corroboration, not replication |
+| Wrist temperature | 34.0 vs 33.7 °C, no interval, 45 | +0.23 [0.12, 0.31] °C, 42 | Same direction and size, on overlapping participants |
+| Resting heart rate | F(3, 123) = 10.26, no bpm | +3.0 [2.2, 3.8] bpm, 42 | Direction agrees; size unpublished (same participants) |
 | Breathing rate, HRV | classifier features only | +0.48 /min; −3.9 ms | No published estimate |
-| Heterogeneity | E3G-coupling spread not above null | personal shift vector not detectable over 2–3 cycles | Both say person differences are hard to see with few cycles |
+| Heterogeneity | E3G-coupling spread not above null | personal shift vector not detectable over 2–3 cycles | Both say person differences are hard to see with few cycles; resting heart rate is the one candidate here |
 
 ## Data hazards reported by prior users
 

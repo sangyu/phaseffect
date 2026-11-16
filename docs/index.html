@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sangyu Xu">
 
 <title>phaseffect</title>
 <style>
@@ -145,6 +146,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://xusangyu.com">Sangyu Xu</a> </p>
+          </div>
+  </div>
     
   
     
@@ -155,16 +162,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Interval 2022 of the <a href="https://physionet.org/content/mcphases/1.0.0/">mcPHASES</a> dataset: 42 participants, Fitbit Sense, Dexcom CGM, Mira urine hormones and a daily diary over about three months. Phases come from the hormone-based labels. Every contrast is within the same participants, against their own follicular days, and is reported as an effect size with a 95 % interval. Nothing on this site is participant-level.</p>
+<p>Interval 2022 of the <a href="https://physionet.org/content/mcphases/1.0.0/">mcPHASES</a> dataset: 42 participants, Fitbit Sense, Dexcom CGM, Mira urine hormones and a daily diary over about three months. Phases are the Mira app’s labels, estimated from urinary LH and E3G and self-reported flow; ovulation is not confirmed. Every contrast is within the same participants, against their own follicular days, and is reported as an effect size with a 95 % interval on the linked pages. Nothing on this site is participant-level.</p>
 <div class="grid">
 <section id="cohort-shifts-by-phase" class="level3 g-col-12 g-col-md-6">
 <h3 class="anchored" data-anchor-id="cohort-shifts-by-phase"><a href="./cohort-shifts.html">Cohort shifts by phase</a></h3>
-<p>Luteal − follicular, same participants: resting heart rate <strong>+3.0 bpm</strong> [2.2, 3.8], wrist temperature <strong>+0.23 °C</strong> [0.12, 0.31], glucose <strong>+0.16 mmol/L</strong> [0.06, 0.27], breathing rate +0.48 /min, HRV −3.9 ms. Menses is the symptom phase: cramps +1.1 points, 41 of 42 participants higher.</p>
+<p>Luteal − follicular, same participants: resting heart rate <strong>+3.0 bpm</strong> [2.2, 3.8], wrist temperature <strong>+0.23 °C</strong> [0.12, 0.31], glucose <strong>+0.16 mmol/L</strong> [0.06, 0.27], breathing rate +0.48 /min, HRV −3.9 ms. Menses is the symptom phase: cramps +1.1 points, 41 of 42 participants higher. The luteal rises in resting heart rate, temperature and glucose agree with earlier analyses of largely the same participants (<a href="https://doi.org/10.1038/s41746-023-00884-x">Lin et al.&nbsp;2023</a>; <a href="https://doi.org/10.1038/s44294-024-00037-9">Lin et al.&nbsp;2024</a>; <a href="https://doi.org/10.1038/s41597-026-06805-3">Lin et al.&nbsp;2026</a>), so they corroborate rather than replicate them; breathing rate and HRV match independent wearable cohorts (<a href="https://doi.org/10.1038/s41746-024-01394-0">Jasinski et al.&nbsp;2024</a>; <a href="https://doi.org/10.1177/17455057261503611">Heneghan et al.&nbsp;2026</a>).</p>
 <p><a href="./cohort-shifts.html"><img src="figures/P1_phenovector_forest.png" class="img-fluid"></a></p>
 </section>
 <section id="does-a-persons-shift-persist" class="level3 g-col-12 g-col-md-6">
 <h3 class="anchored" data-anchor-id="does-a-persons-shift-persist"><a href="./repeatability.html">Does a person’s shift persist?</a></h3>
-<p>The average contrast is clear; whether people differ persistently in it is not settled. Resting heart rate is a candidate: a between-person SD of <strong>1.9 bpm</strong> on a 3.0 bpm average, larger than most simulated no-difference cohorts produce. The other four metrics are uninformative. Intervals are withheld until calibrated by simulation.</p>
+<p>The average contrast is clear; whether people differ persistently in it is not settled. Resting heart rate is a candidate: a between-person SD of <strong>1.9 bpm</strong> on a 3.0 bpm average, larger than 397 of 400 simulated no-difference cohorts in a preview simulation (independent nights, simplified design); the calibrated run is pending. The other four metrics are uninformative. Intervals are withheld until calibrated by simulation.</p>
 <p><a href="./repeatability.html"><img src="figures/F4_rep03.png" class="img-fluid"></a></p>
 </section>
 </div>

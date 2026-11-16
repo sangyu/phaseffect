@@ -150,7 +150,7 @@ def f2():
     n_lo, n_hi = int(icc.n_participants.min()), int(icc.n_participants.max())
     ax.set_title(f'B  Per feature, {n_lo}–{n_hi} participants (blue: device metrics, orange: symptoms)', fontsize=9.5, loc='left', color=INK)
 
-    fig.suptitle("Does a person's luteal − follicular shift repeat across her cycles?  mcPHASES interval 2022, closed cycles",
+    fig.suptitle("Does a person's luteal − follicular shift repeat across their cycles?  mcPHASES interval 2022, closed cycles",
                  x=0.01, y=0.99, ha='left', fontsize=11, color=INK)
     fig.text(0.01, 0.005, f"Cohort aggregates over {n_lo}–{s['n_participants_within']} participants; no participant-level value, identifier or date appears.",
              fontsize=8, color=INK2)
@@ -253,7 +253,7 @@ def f4():
     ax.set_title("B  Where a single cycle's shift varies", fontsize=9.5, loc='left', color=INK)
 
     n_lo = int(ok.n_participants.min())
-    fig.suptitle("Does a person's luteal − follicular shift persist across her cycles?  Five device metrics, closed cycles, mcPHASES interval 2022\n"
+    fig.suptitle("Does a person's luteal − follicular shift persist across their cycles?  Five device metrics, closed cycles, mcPHASES interval 2022\n"
                  f"Cohort aggregates over {n_lo} or more participants per metric; no participant-level value, identifier or date appears.",
                  x=0.01, y=1.06, ha='left', fontsize=10, color=INK)
     out = FIGURES / 'F4_rep03.png'
